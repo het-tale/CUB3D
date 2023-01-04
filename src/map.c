@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:10:45 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/03 09:44:16 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:22:16 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,6 @@ void	draw_player(t_mlx *mlx)
 	draw_square(mlx, mlx->player.x, mlx->player.y, 0xFF0000, 1);
 	ddaline(mlx->player.x, mlx->player.y, mlx->player.x + cos(mlx->player.rot_angle) * 30,
 	mlx->player.y + sin(mlx->player.rot_angle) * 30, mlx);
-}
-
-void	draw_rect(t_mlx *mlx, int x, int y, int width, int height)
-{
-	int i;
-	int j;
-
-
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			my_mlx_pixel_put(&mlx->mlx_img, x + j, y + i, 0xFFFFFF);
-			j++;
-		}
-		i++;
-	}
 }
 
 void	draw_square(t_mlx *mlx, int x, int y, int color, int is_p)

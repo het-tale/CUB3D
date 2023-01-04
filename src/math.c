@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:48:55 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/03 07:54:14 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:12:48 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	ddaline(int x1, int y1, int x2, int y2, t_mlx *mlx)
 	float	yinc;
 	float	x;
 	float	y;
-	// float	start_x;
-	// float	start_y;
 
 	dx = abs(x1 - x2);
 	dy = abs(y1 - y2);
@@ -38,9 +36,7 @@ void	ddaline(int x1, int y1, int x2, int y2, t_mlx *mlx)
 	i = 0;
 	while (i <= steps)
 	{
-		// start_x = x + (mlx->win_w / 2);
-		// start_y = y + (mlx->win_h / 500);
-		my_mlx_pixel_put(&mlx->mlx_img, x, y, 0xff0000);
+		my_mlx_pixel_put(&mlx->mlx_img, mlx->scale * x, mlx->scale * y, 0xff0000);
 		x += xinc;
 		y += yinc;
 		i++;

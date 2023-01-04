@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/03 09:42:32 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:51:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,9 @@ void	render_walls(t_mlx *mlx)
 		j = start;
 		while (j < end)
 		{
-			my_mlx_pixel_put(&mlx->mlx_img, i, j, 0x0000FF);
+			my_mlx_pixel_put(&mlx->mlx_img, i, j, 0x808080);
 			j++;
 		}
-		// if (mlx->ray.ray_dir == 'N' || mlx->ray.ray_dir == 'S' || mlx->ray.ray_dir == 'E' || mlx->ray.ray_dir == 'W')
-		// {
-		// 	// if (mlx->ray.was_hit_vertical)
-		// 	// 	off_x = (int)mlx->ray.wall_hit_y % TILE_SIZE;
-		// 	// else
-		// 	// 	off_x = (int)mlx->ray.wall_hit_x % TILE_SIZE;
-		// 	j = start;
-		// 	while (j <  end)
-		// 	{
-		// 		//off_y = (j + (wall_strip_height / 2) - (mlx->win_h / 2));
-		// 		my_mlx_pixel_put(&mlx->mlx_img, i, j, 0xFFFFFF);
-		// 		j++;
-		// 	}
-		// }
 		ray_angle += mlx->fov / NUM_RAYS;
 		i++;
 	}
