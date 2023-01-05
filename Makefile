@@ -6,14 +6,14 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/05 00:57:06 by het-tale         ###   ########.fr        #
+#    Updated: 2023/01/05 03:11:39 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    =    cub3d
 
 SRCS    =    src/main.c parsing/parsing.c parsing/libft/*.c parsing/get_next_line/get_next_line.c parsing/get_next_line/get_next_line_utils.c \
-			 src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c
+			 src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c
 
 #SRCS	= test.c
 #linux

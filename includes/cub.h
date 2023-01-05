@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 01:32:28 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 03:13:35 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,27 @@ typedef struct s_mlx_img
 	int		ll;
 }	t_img;
 
+typedef struct s_leaks
+{
+	void			*leak;
+	struct s_leaks	*next;
+}	t_leaks;
+
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	rot_speed;
-	double	move_speed;
-	double	rot_angle;
-	double	turn_direction;
-	double	walk_ud_dir;
-	double	walk_rl_dir;
+	double			x;
+	double			y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			rot_speed;
+	double			move_speed;
+	double			rot_angle;
+	double			turn_direction;
+	double			walk_ud_dir;
+	double			walk_rl_dir;
+	unsigned int	plyr_color;
 }	t_player;
 
 typedef struct s_ray
@@ -92,58 +99,58 @@ typedef struct s_ray
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_img		mlx_img;
-	char		**map;
-	int			map_h;
-	int			map_w;
-	int			win_w;
-	int			win_h;
-	t_player	player;
-	t_ray		ray;
-	double		fov;
-	double		scale;
+	void			*mlx;
+	void			*mlx_win;
+	t_img			mlx_img;
+	char			**map;
+	int				map_h;
+	int				map_w;
+	int				win_w;
+	int				win_h;
+	t_player		player;
+	t_ray			ray;
+	double			fov;
+	double			scale;
+	unsigned int	map_color;
+	t_leaks			*leak;
 }	t_mlx;
-
-typedef struct s_dda
-{
-	int		dx;
-	int		dy;
-	int		steps;
-	int		i;
-	float	xinc;
-	float	yinc;
-	float	x;
-	float	y;
-	float	start_x;
-	float	start_y;
-}	t_dda;
 
 typedef struct s_raycast
 {
-	double xintercept;
-	double yintercept;
-	double xstep;
-	double ystep;
-	double next_horz_touch_x;
-	double next_horz_touch_y;
-	double found_horz_wall_hit;
-	double found_vert_wall_hit;
-	double next_vert_touch_x;
-	double next_vert_touch_y;
-	double horz_hit_distance;
-	double vert_hit_distance;
-	double horz_wall_hit_x;
-	double horz_wall_hit_y;
-	double vert_wall_hit_x;
-	double vert_wall_hit_y;
+	double	xintercept;
+	double	yintercept;
+	double	xstep;
+	double	ystep;
+	double	next_horz_touch_x;
+	double	next_horz_touch_y;
+	double	found_horz_wall_hit;
+	double	found_vert_wall_hit;
+	double	next_vert_touch_x;
+	double	next_vert_touch_y;
+	double	horz_hit_distance;
+	double	vert_hit_distance;
+	double	horz_wall_hit_x;
+	double	horz_wall_hit_y;
+	double	vert_wall_hit_x;
+	double	vert_wall_hit_y;
 }	t_raycast;
+
+typedef struct s_wall
+{
+	int		i;
+	double	wall_h;
+	double	dist_proj;
+	double	ray_angle;
+	int		j;
+	int		start;
+	int		end;
+	double	true_dist;
+}	t_wall;
 
 /* parsing*/
 
-int			count_lines(char *argv[]);
-char		**ft_parse(char *argv[]);
+int			count_lines(char *argv[], t_mlx *mlx);
+char		**ft_parse(char *argv[], t_mlx *mlx);
 void		count_length(t_mlx *mlx);
 void		draw_map(t_mlx *mlx);
 
@@ -153,7 +160,6 @@ t_player	init_player(void);
 t_mlx		*init_mlx(char *argv[]);
 
 /*				Math		*/
-void		ddaline(int x1, int y1, int x2, int y2, t_mlx *mlx);
 double		distance_between_points(double x1, double y1, double x2, double y2);
 double		normalize_angle(double angle);
 /*				keys			*/
@@ -173,9 +179,8 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /*			Draw minimap			*/
 void		draw_map(t_mlx *mlx);
-void		draw_player(t_mlx *mlx);
-void		draw_square(t_mlx *mlx, int x, int y, int color, int is_p);
-int			has_wall_at(double x, double y, t_mlx *mlx);
+void		draw_square(t_mlx *mlx, int x, int y, int is_p);
+int			is_wall(double x, double y, t_mlx *mlx);
 
 /*			raycasting				*/
 void		init_casting(t_mlx *mlx);
@@ -186,7 +191,10 @@ void		cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 void		cast_ray(t_mlx *mlx, t_ray *ray);
 
 /*			rendring walls			*/
-void		render_walls(t_mlx *mlx);
-void		draw_rect(t_mlx *mlx, int x, int y, int width, int height);
+void		start_walls(t_mlx *mlx);
 void		get_ray_direction(t_ray *ray);
+
+/*				free memory     */
+void		leaks_removal(t_leaks **leaks, void *ptr);
+void		free_leaks(t_leaks **garbage);
 #endif

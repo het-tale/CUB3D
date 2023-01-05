@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:10:45 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/04 11:22:16 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 02:48:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,54 @@ void	draw_map(t_mlx *mlx)
 		while (j < mlx->map_w)
 		{
 			if (mlx->map[i][j] == '1')
-				draw_square(mlx, (j * TILE_SIZE), (i * TILE_SIZE), 0xFFFFFF, 0);
+				draw_square(mlx, (j * TILE_SIZE), (i * TILE_SIZE), 0);
 			j++;
 		}
 		i++;
 	}
-	draw_player(mlx);
+	draw_square(mlx, mlx->player.x, mlx->player.y, 1);
 }
 
-void	draw_player(t_mlx *mlx)
+void	square_conditions(t_mlx *mlx, int *size, unsigned int *color, int is_p)
 {
-	draw_square(mlx, mlx->player.x, mlx->player.y, 0xFF0000, 1);
-	ddaline(mlx->player.x, mlx->player.y, mlx->player.x + cos(mlx->player.rot_angle) * 30,
-	mlx->player.y + sin(mlx->player.rot_angle) * 30, mlx);
+	if (is_p == 1)
+	{
+		*size = TILE_SIZE / 16;
+		*color = mlx->player.plyr_color;
+	}
+	else
+	{
+		*size = TILE_SIZE;
+		*color = mlx->map_color;
+	}
 }
 
-void	draw_square(t_mlx *mlx, int x, int y, int color, int is_p)
+void	draw_square(t_mlx *mlx, int x, int y, int is_p)
 {
-	int i;
-	int j;
-	int	size;
+	int				i;
+	int				j;
+	int				size;
+	unsigned int	color;
 
 	i = 0;
-	if (is_p == 1)
-		size = TILE_SIZE / 16;
-	else
-		size = TILE_SIZE;
+	square_conditions(mlx, &size, &color, is_p);
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
-			my_mlx_pixel_put(&mlx->mlx_img, mlx->scale * (x + j), mlx->scale * (y + i), color);
+			my_mlx_pixel_put(&mlx->mlx_img, mlx->scale * (x + j),
+				mlx->scale * (y + i), color);
 			j++;
 		}
 		i++;
 	}
 }
 
-int	has_wall_at(double x, double y, t_mlx *mlx)
+int	is_wall(double x, double y, t_mlx *mlx)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = floor(x / TILE_SIZE);
 	j = floor(y / TILE_SIZE);

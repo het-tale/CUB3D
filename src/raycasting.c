@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:03:14 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 01:32:50 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 03:02:10 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
 	{
 		if (ray->is_up)
 			rcst->next_horz_touch_y--;
-		if (has_wall_at(rcst->next_horz_touch_x, rcst->next_horz_touch_y, mlx))
+		if (is_wall(rcst->next_horz_touch_x, rcst->next_horz_touch_y, mlx))
 		{
 			rcst->found_horz_wall_hit = 1;
 			rcst->horz_wall_hit_x = rcst->next_horz_touch_x;
@@ -71,7 +71,7 @@ void	cast_vert_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
 	{
 		if (ray->is_left)
 			rcst->next_vert_touch_x--;
-		if (has_wall_at(rcst->next_vert_touch_x, rcst->next_vert_touch_y, mlx))
+		if (is_wall(rcst->next_vert_touch_x, rcst->next_vert_touch_y, mlx))
 		{
 			rcst->found_vert_wall_hit = 1;
 			rcst->vert_wall_hit_x = rcst->next_vert_touch_x;
@@ -91,6 +91,7 @@ void	cast_ray(t_mlx *mlx, t_ray *ray)
 	t_raycast *rcst;
 
 	rcst = malloc(sizeof(t_raycast));
+	leaks_removal(&mlx->leak, rcst);
 	cast_horz_ray(mlx, ray, rcst);
 	cast_vert_ray(mlx, ray, rcst);
 	//calculate the distance

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 09:48:55 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 02:49:33 by het-tale         ###   ########.fr       */
+/*   Created: 2023/01/05 03:10:21 by het-tale          #+#    #+#             */
+/*   Updated: 2023/01/05 03:11:06 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-double	distance_between_points(double x1, double y1, double x2, double y2)
+void	leaks_removal(t_leaks **leaks, void *ptr)
 {
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+	t_leaks	*garbage;
+
+	garbage = malloc(sizeof(t_leaks));
+	garbage->leak = ptr;
+	garbage->next = *(leaks);
+	*leaks = garbage;
 }
 
-double	normalize_angle(double angle)
+void	free_leaks(t_leaks **garbage)
 {
-	angle = remainder(angle, 2 * M_PI);
-	if (angle < 0)
-		angle = (2 * M_PI) + angle;
-	return (angle);
+	t_leaks	*trash;
+
+	trash = *garbage;
+	while (trash)
+	{
+		free(*garbage);
+		trash = trash->next;
+		*garbage = trash;
+	}
 }

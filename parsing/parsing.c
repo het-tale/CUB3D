@@ -6,13 +6,13 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 09:43:34 by het-tale          #+#    #+#             */
-/*   Updated: 2022/12/31 09:34:59 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 03:06:27 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int	count_lines(char *argv[])
+int	count_lines(char *argv[], t_mlx *mlx)
 {
 	int		lines;
 	char	*line;
@@ -27,11 +27,13 @@ int	count_lines(char *argv[])
 		if (line == NULL)
 			break ;
 		lines++;
+		leaks_removal(&mlx->leak, line);
 	}
+	leaks_removal(&mlx->leak, line);
 	return (lines);
 }
 
-char	**ft_parse(char *argv[])
+char	**ft_parse(char *argv[], t_mlx *mlx)
 {
 	int		fd;
 	int		count;
@@ -40,9 +42,10 @@ char	**ft_parse(char *argv[])
 	int		i;
 
 	line = "";
-	count = count_lines(argv);
+	count = count_lines(argv, mlx);
 	fd = open(argv[1], O_RDONLY);
 	map = malloc((count + 1) * sizeof(char *));
+	leaks_removal(&mlx->leak, map);
 	i = 0;
 	while (1)
 	{
@@ -53,6 +56,8 @@ char	**ft_parse(char *argv[])
 			break ;
 		}
 		map[i] = ft_strdup(line);
+		leaks_removal(&mlx->leak, map[i]);
+		leaks_removal(&mlx->leak, line);
 		i++;
 	}
 	return (map);
