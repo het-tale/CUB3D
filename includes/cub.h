@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 05:21:54 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:03:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_mlx
 	t_ray			ray;
 	double			fov;
 	double			scale;
+	double			num_rays;
 	unsigned int	map_color;
 	t_leaks			*leak;
 }	t_mlx;

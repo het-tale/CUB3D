@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:10:45 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 02:48:02 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:02:14 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	is_wall(double x, double y, t_mlx *mlx)
 
 	i = floor(x / TILE_SIZE);
 	j = floor(y / TILE_SIZE);
-	if (i < 0 || i >= mlx->map_w || j < 0 || j >= mlx->map_h)
+	if (x < 0 || x >= mlx->win_w || y < 0 || y >= mlx->win_h)
 		return (1);
 	if (mlx->map[j][i] == '1')
 		return (1);

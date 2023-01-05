@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 03:03:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:05:59 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ t_mlx	*init_mlx(char *argv[])
 	count_length(mlx);
 	mlx->map_h = count_lines(argv, mlx);
 	mlx->mlx = mlx_init();
-	mlx->win_w = 1000;
-	mlx->win_h = 1000;
-	mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_w, mlx->win_h, "Hello");
+	mlx->win_w = mlx->map_w * TILE_SIZE;
+	mlx->win_h = mlx->map_h * TILE_SIZE;
+	mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_w, mlx->win_h, "CUB");
 	mlx->player = init_player();
 	mlx->fov = 60 * (M_PI / 180);
 	mlx->scale = 0.1;
 	mlx->map_color = 0xFFFFFF;
+	mlx->num_rays = mlx->win_w;
 	start_walls(mlx);
 	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->mlx_img.img, 0, 0);

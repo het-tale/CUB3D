@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 02:44:52 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:03:57 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_wall(t_mlx *mlx)
 
 	wall.i = 0;
 	wall.ray_angle = mlx->player.rot_angle - (mlx->fov / 2);
-	while (wall.i < NUM_RAYS)
+	while (wall.i < mlx->num_rays)
 	{
 		init_tools(mlx, &wall);
 		wall.j = wall.start;
@@ -60,7 +60,7 @@ void	draw_wall(t_mlx *mlx)
 			my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, 0x808080);
 			wall.j++;
 		}
-		wall.ray_angle += mlx->fov / NUM_RAYS;
+		wall.ray_angle += mlx->fov / mlx->num_rays;
 		wall.i++;
 	}
 }
