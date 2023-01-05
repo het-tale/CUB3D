@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:03:14 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 09:01:54 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:21:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,13 @@ void	detect_distance(t_ray *ray, t_raycast *rcst)
 		ray->distance = rcst->h_dist;
 		ray->wall_x = rcst->h_hit_x;
 		ray->wall_y = rcst->h_hit_y;
-		ray->hit_v_h = 0;
+		ray->is_hit_v = 0;
 	}
 	else
 	{
 		ray->distance = rcst->v_dist;
 		ray->wall_x = rcst->v_hit_x;
 		ray->wall_y = rcst->v_hit_y;
-		ray->hit_v_h = 1;
+		ray->is_hit_v = 1;
 	}
 }

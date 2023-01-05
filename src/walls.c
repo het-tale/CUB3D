@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 09:02:09 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:36:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	cast_ray(t_mlx *mlx, t_ray *ray)
 
 void	get_ray_direction(t_ray *ray)
 {
-	if (ray->is_down && !ray->hit_v_h)
+	if (ray->is_down && !ray->is_hit_v)
 		ray->ray_dir = 'S';
-	else if (!ray->hit_v_h)
+	else if (!ray->is_hit_v)
 		ray->ray_dir = 'N';
 	else if (ray->is_right)
 		ray->ray_dir = 'E';

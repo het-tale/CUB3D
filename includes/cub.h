@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 09:05:45 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:21:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_ray
 	double	wall_x;
 	double	wall_y;
 	double	distance;
-	int		hit_v_h;
+	int		is_hit_v;
 	int		is_down;
 	int		is_up;
 	int		is_right;
