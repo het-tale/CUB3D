@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 07:05:59 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:57:37 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,16 @@ t_mlx	*init_mlx(char *argv[])
 	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->mlx_img.img, 0, 0);
 	return (mlx);
+}
+
+void	get_ray_direction(t_ray *ray)
+{
+	if (ray->is_down && !ray->is_hit_v)
+		ray->ray_dir = 'S';
+	else if (!ray->is_hit_v)
+		ray->ray_dir = 'N';
+	else if (ray->is_right)
+		ray->ray_dir = 'E';
+	else
+		ray->ray_dir = 'W';
 }

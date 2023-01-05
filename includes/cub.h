@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 09:21:15 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:58:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void		define_horz_data(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 /*			rendring walls			*/
 void		start_walls(t_mlx *mlx);
 void		get_ray_direction(t_ray *ray);
+void		ceil_floor(t_mlx *mlx, t_wall *wall);
 
 /*				free memory     */
 void		leaks_removal(t_leaks **leaks, void *ptr);

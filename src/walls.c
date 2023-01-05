@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 09:36:08 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:57:30 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ void	cast_ray(t_mlx *mlx, t_ray *ray)
 	detect_distance(ray, rcst);
 }
 
-void	get_ray_direction(t_ray *ray)
-{
-	if (ray->is_down && !ray->is_hit_v)
-		ray->ray_dir = 'S';
-	else if (!ray->is_hit_v)
-		ray->ray_dir = 'N';
-	else if (ray->is_right)
-		ray->ray_dir = 'E';
-	else
-		ray->ray_dir = 'W';
-}
-
 void	init_tools(t_mlx *mlx, t_wall *wall)
 {
 	mlx->ray = init_ray(wall->ray_angle);
@@ -66,6 +54,24 @@ void	init_tools(t_mlx *mlx, t_wall *wall)
 	}
 }
 
+void	ceil_floor(t_mlx *mlx, t_wall *wall)
+{
+	int		y;
+
+	y = 0;
+	while (y < wall->start)
+	{
+		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, 0x87ceeb);
+		y++;
+	}
+	y = wall->end;
+	while (y < mlx->win_h)
+	{
+		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, 0x654321);
+		y++;
+	}
+}
+
 void	draw_wall(t_mlx *mlx)
 {
 	t_wall	wall;
@@ -75,6 +81,7 @@ void	draw_wall(t_mlx *mlx)
 	while (wall.i < mlx->num_rays)
 	{
 		init_tools(mlx, &wall);
+		ceil_floor(mlx, &wall);
 		wall.j = wall.start;
 		while (wall.j < wall.end)
 		{
