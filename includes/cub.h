@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 07:03:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:05:45 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,22 +118,22 @@ typedef struct s_mlx
 
 typedef struct s_raycast
 {
-	double	xintercept;
-	double	yintercept;
-	double	xstep;
-	double	ystep;
-	double	next_horz_touch_x;
-	double	next_horz_touch_y;
-	double	found_horz_wall_hit;
-	double	found_vert_wall_hit;
-	double	next_vert_touch_x;
-	double	next_vert_touch_y;
-	double	horz_hit_distance;
-	double	vert_hit_distance;
-	double	horz_wall_hit_x;
-	double	horz_wall_hit_y;
-	double	vert_wall_hit_x;
-	double	vert_wall_hit_y;
+	double	x_inter;
+	double	y_inter;
+	double	x_step;
+	double	y_step;
+	double	next_h_x;
+	double	next_h_y;
+	double	found_h_wall;
+	double	found_v_wall;
+	double	next_v_x;
+	double	next_v_y;
+	double	h_dist;
+	double	v_dist;
+	double	h_hit_x;
+	double	h_hit_y;
+	double	v_hit_x;
+	double	v_hit_y;
 }	t_raycast;
 
 typedef struct s_wall
@@ -188,7 +188,9 @@ void		draw_rays(t_mlx *mlx);
 void		cast_ray(t_mlx *mlx, t_ray *ray);
 void		cast_vert_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 void		cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
-void		cast_ray(t_mlx *mlx, t_ray *ray);
+void		detect_distance(t_ray *ray, t_raycast *rcst);
+void		define_vert_data(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
+void		define_horz_data(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 
 /*			rendring walls			*/
 void		start_walls(t_mlx *mlx);

@@ -6,115 +6,112 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:03:14 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 03:02:10 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:01:54 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
+void	define_horz_data(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
+{
+	rcst->found_h_wall = 0;
+	rcst->y_inter = floor(mlx->player.y / TILE_SIZE) * TILE_SIZE;
+	if (ray->is_down)
+		rcst->y_inter += TILE_SIZE;
+	rcst->x_inter = mlx->player.x
+		+ (rcst->y_inter - mlx->player.y) / tan(ray->ray_angle);
+	rcst->y_step = TILE_SIZE;
+	if (ray->is_up)
+		rcst->y_step *= -1;
+	rcst->x_step = TILE_SIZE / tan(ray->ray_angle);
+	if (ray->is_left && rcst->x_step > 0)
+		rcst->x_step *= -1;
+	else if (ray->is_right && rcst->x_step < 0)
+		rcst->x_step *= -1;
+	rcst->next_h_x = rcst->x_inter;
+	rcst->next_h_y = rcst->y_inter;
+}
+
+void	define_vert_data(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
+{
+	rcst->found_v_wall = 0;
+	rcst->x_inter = floor(mlx->player.x / TILE_SIZE) * TILE_SIZE;
+	if (ray->is_right)
+		rcst->x_inter += TILE_SIZE;
+	rcst->y_inter = mlx->player.y
+		+ (rcst->x_inter - mlx->player.x) * tan(ray->ray_angle);
+	rcst->x_step = TILE_SIZE;
+	if (ray->is_left)
+		rcst->x_step *= -1;
+	rcst->y_step = TILE_SIZE * tan(ray->ray_angle);
+	if (ray->is_up && rcst->y_step > 0)
+		rcst->y_step *= -1;
+	else if (ray->is_down && rcst->y_step < 0)
+		rcst->y_step *= -1;
+	rcst->next_v_x = rcst->x_inter;
+	rcst->next_v_y = rcst->y_inter;
+}
+
 void	cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
 {
-	rcst->found_horz_wall_hit = 0;
-	rcst->yintercept = floor(mlx->player.y / TILE_SIZE) * TILE_SIZE;
-	if (ray->is_down)
-		rcst->yintercept += TILE_SIZE;
-	rcst->xintercept = mlx->player.x + (rcst->yintercept - mlx->player.y) / tan(ray->ray_angle);
-	rcst->ystep = TILE_SIZE;
-	if (ray->is_up)
-		rcst->ystep *= -1;
-	rcst->xstep = TILE_SIZE / tan(ray->ray_angle);
-	if (ray->is_left && rcst->xstep > 0)
-		rcst->xstep *= -1;
-	else if (ray->is_right && rcst->xstep < 0)
-		rcst->xstep *= -1;
-	rcst->next_horz_touch_x = rcst->xintercept;
-	rcst->next_horz_touch_y = rcst->yintercept;
-	while (rcst->next_horz_touch_x >= 0 && rcst->next_horz_touch_x <= mlx->win_w && rcst->next_horz_touch_y >= 0 && rcst->next_horz_touch_y <= mlx->win_h)
+	define_horz_data(mlx, ray, rcst);
+	while (rcst->next_h_x >= 0 && rcst->next_h_x <= mlx->win_w
+		&& rcst->next_h_y >= 0 && rcst->next_h_y <= mlx->win_h)
 	{
 		if (ray->is_up)
-			rcst->next_horz_touch_y--;
-		if (is_wall(rcst->next_horz_touch_x, rcst->next_horz_touch_y, mlx))
+			rcst->next_h_y--;
+		if (is_wall(rcst->next_h_x, rcst->next_h_y, mlx))
 		{
-			rcst->found_horz_wall_hit = 1;
-			rcst->horz_wall_hit_x = rcst->next_horz_touch_x;
-			rcst->horz_wall_hit_y = rcst->next_horz_touch_y;
+			rcst->found_h_wall = 1;
+			rcst->h_hit_x = rcst->next_h_x;
+			rcst->h_hit_y = rcst->next_h_y;
 			break ;
 		}
 		else
 		{
-			rcst->next_horz_touch_x += rcst->xstep;
-			rcst->next_horz_touch_y += rcst->ystep;
+			rcst->next_h_x += rcst->x_step;
+			rcst->next_h_y += rcst->y_step;
 		}
 	}
 }
 
 void	cast_vert_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst)
 {
-	
-	//vertical intersection
-	rcst->found_vert_wall_hit = 0;
-	rcst->xintercept = floor(mlx->player.x / TILE_SIZE) * TILE_SIZE;
-	if (ray->is_right)
-		rcst->xintercept += TILE_SIZE;
-	rcst->yintercept = mlx->player.y + (rcst->xintercept - mlx->player.x) * tan(ray->ray_angle);
-	rcst->xstep = TILE_SIZE;
-	if (ray->is_left)
-		rcst->xstep *= -1;
-	rcst->ystep = TILE_SIZE * tan(ray->ray_angle);
-	if (ray->is_up && rcst->ystep > 0)
-		rcst->ystep *= -1;
-	else if (ray->is_down && rcst->ystep < 0)
-		rcst->ystep *= -1;
-	rcst->next_vert_touch_x = rcst->xintercept;
-	rcst->next_vert_touch_y = rcst->yintercept;
-	while (rcst->next_vert_touch_x >= 0 && rcst->next_vert_touch_x <= mlx->win_w && rcst->next_vert_touch_y >= 0 && rcst->next_vert_touch_y <= mlx->win_h)
+	define_vert_data(mlx, ray, rcst);
+	while (rcst->next_v_x >= 0 && rcst->next_v_x <= mlx->win_w
+		&& rcst->next_v_y >= 0 && rcst->next_v_y <= mlx->win_h)
 	{
 		if (ray->is_left)
-			rcst->next_vert_touch_x--;
-		if (is_wall(rcst->next_vert_touch_x, rcst->next_vert_touch_y, mlx))
+			rcst->next_v_x--;
+		if (is_wall(rcst->next_v_x, rcst->next_v_y, mlx))
 		{
-			rcst->found_vert_wall_hit = 1;
-			rcst->vert_wall_hit_x = rcst->next_vert_touch_x;
-			rcst->vert_wall_hit_y = rcst->next_vert_touch_y;
+			rcst->found_v_wall = 1;
+			rcst->v_hit_x = rcst->next_v_x;
+			rcst->v_hit_y = rcst->next_v_y;
 			break ;
 		}
 		else
 		{
-			rcst->next_vert_touch_x += rcst->xstep;
-			rcst->next_vert_touch_y += rcst->ystep;
+			rcst->next_v_x += rcst->x_step;
+			rcst->next_v_y += rcst->y_step;
 		}
 	}
 }
 
-void	cast_ray(t_mlx *mlx, t_ray *ray)
+void	detect_distance(t_ray *ray, t_raycast *rcst)
 {
-	t_raycast *rcst;
-
-	rcst = malloc(sizeof(t_raycast));
-	leaks_removal(&mlx->leak, rcst);
-	cast_horz_ray(mlx, ray, rcst);
-	cast_vert_ray(mlx, ray, rcst);
-	//calculate the distance
-	if (rcst->found_horz_wall_hit)
-		rcst->horz_hit_distance = distance_between_points(mlx->player.x, mlx->player.y, rcst->horz_wall_hit_x, rcst->horz_wall_hit_y);
-	else
-		rcst->horz_hit_distance = INT_MAX;
-	if (rcst->found_vert_wall_hit)
-		rcst->vert_hit_distance = distance_between_points(mlx->player.x, mlx->player.y, rcst->vert_wall_hit_x, rcst->vert_wall_hit_y);
-	else
-		rcst->vert_hit_distance = INT_MAX;
-	if (rcst->horz_hit_distance < rcst->vert_hit_distance)
+	if (rcst->h_dist < rcst->v_dist)
 	{
-		ray->distance = rcst->horz_hit_distance;
-		ray->wall_x = rcst->horz_wall_hit_x;
-		ray->wall_y = rcst->horz_wall_hit_y;
+		ray->distance = rcst->h_dist;
+		ray->wall_x = rcst->h_hit_x;
+		ray->wall_y = rcst->h_hit_y;
 		ray->hit_v_h = 0;
 	}
 	else
 	{
-		ray->distance = rcst->vert_hit_distance;
-		ray->wall_x = rcst->vert_wall_hit_x;
-		ray->wall_y = rcst->vert_wall_hit_y;
+		ray->distance = rcst->v_dist;
+		ray->wall_x = rcst->v_hit_x;
+		ray->wall_y = rcst->v_hit_y;
 		ray->hit_v_h = 1;
 	}
 }

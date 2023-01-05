@@ -6,11 +6,32 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 07:03:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:02:09 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void	cast_ray(t_mlx *mlx, t_ray *ray)
+{
+	t_raycast	*rcst;
+
+	rcst = malloc(sizeof(t_raycast));
+	leaks_removal(&mlx->leak, rcst);
+	cast_horz_ray(mlx, ray, rcst);
+	cast_vert_ray(mlx, ray, rcst);
+	if (rcst->found_h_wall)
+		rcst->h_dist = distance_between_points(mlx->player.x, mlx->player.y,
+				rcst->h_hit_x, rcst->h_hit_y);
+	else
+		rcst->h_dist = INT_MAX;
+	if (rcst->found_v_wall)
+		rcst->v_dist = distance_between_points(mlx->player.x, mlx->player.y,
+				rcst->v_hit_x, rcst->v_hit_y);
+	else
+		rcst->v_dist = INT_MAX;
+	detect_distance(ray, rcst);
+}
 
 void	get_ray_direction(t_ray *ray)
 {
