@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:04:58 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/04 11:38:41 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:02:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_forward(t_mlx *mlx)
 
 	new_x = mlx->player.x;
 	new_y = mlx->player.y;
-	mlx->player.walk_ud_dir = 1;
+	mlx->player.walk_ud_dir = -1;
 	step = mlx->player.move_speed * mlx->player.walk_ud_dir;
 	new_x -= step * cos(mlx->player.rot_angle);
 	new_y -= step * sin(mlx->player.rot_angle);
@@ -39,7 +39,7 @@ void	move_backward(t_mlx *mlx)
 
 	new_x = mlx->player.x;
 	new_y = mlx->player.y;
-	mlx->player.walk_ud_dir = -1;
+	mlx->player.walk_ud_dir = 1;
 	step = mlx->player.move_speed * mlx->player.walk_ud_dir;
 	new_x -= step * cos(mlx->player.rot_angle);
 	new_y -= step * sin(mlx->player.rot_angle);

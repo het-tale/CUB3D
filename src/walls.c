@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/04 10:51:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:23:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	render_walls(t_mlx *mlx)
 	int	j;
 	int	start;
 	int	end;
+	double true_dist;
 
 	mlx->mlx_img.img = mlx_new_image(mlx->mlx, mlx->win_w, mlx->win_h);
 	mlx->mlx_img.addr = mlx_get_data_addr(mlx->mlx_img.img, &mlx->mlx_img.bpp,
@@ -44,9 +45,9 @@ void	render_walls(t_mlx *mlx)
 		mlx->ray = init_ray(ray_angle);
 		cast_ray(mlx, &mlx->ray);
 		get_ray_direction(&mlx->ray);
-		//my_mlx_pixel_put(&mlx->mlx_img, i, 1, 0xFFFFFF);
+		true_dist = mlx->ray.distance * cos(ray_angle - mlx->player.rot_angle);
 		dist_proj = (mlx->win_w / 2) / tan(mlx->fov / 2);
-		wall_strip_height = (TILE_SIZE / mlx->ray.distance) * dist_proj;
+		wall_strip_height = (TILE_SIZE / true_dist) * dist_proj;
 		if (wall_strip_height < mlx->win_h)
 		{
 			start = (mlx->win_h / 2) - wall_strip_height / 2;

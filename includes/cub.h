@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/03 09:45:58 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 00:59:38 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,30 @@
 # include <errno.h>
 # include "../parsing/get_next_line/get_next_line.h"
 # include "../parsing/libft/libft.h"
-# define RIGHT_KEY 65363//124
-# define LEFT_KEY 65361//123
+
+//linux
+// # define RIGHT_KEY 65363//124
+// # define LEFT_KEY 65361//123
+// # define UP_KEY 126
+// # define DOWN_KEY 125
+// # define ESC 65307//53
+// # define W 1491//13
+// # define A 1492//0
+// # define S 1493 //1
+// # define D 1514 //2
+//mac
+# define RIGHT_KEY 124
+# define LEFT_KEY 123
 # define UP_KEY 126
 # define DOWN_KEY 125
-# define ESC 65307//53
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
 # define TILE_SIZE 64
 # define NUM_RAYS 1000
 # define INT_MAX 2147483647
-# define W 1491//13
-# define A 1492//0
-# define S 1493 //1
-# define D 1514 //2
 
 typedef struct s_mlx_img
 {
