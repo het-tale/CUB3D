@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 10:57:37 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 11:50:02 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_player	init_player(void)
 	plyr.y = 7 * TILE_SIZE + TILE_SIZE / 2;
 	plyr.rot_angle = 1.5 * M_PI;
 	plyr.rot_speed = 3 * (M_PI / 180);
-	plyr.move_speed = 3;
+	plyr.move_speed = 10;
 	plyr.turn_direction = 0;
 	plyr.walk_ud_dir = 0;
 	plyr.walk_rl_dir = 0;
