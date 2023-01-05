@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 00:59:38 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:32:28 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,14 @@ typedef struct s_player
 typedef struct s_ray
 {
 	double	ray_angle;
-	double	wall_hit_x;
-	double	wall_hit_y;
+	double	wall_x;
+	double	wall_y;
 	double	distance;
-	int		was_hit_vertical;
-	int		is_ray_facing_down;
-	int		is_ray_facing_up;
-	int		is_ray_facing_right;
-	int		is_ray_facing_left;
-	int		wall_hit_content;
+	int		hit_v_h;
+	int		is_down;
+	int		is_up;
+	int		is_right;
+	int		is_left;
 	char	ray_dir;
 }	t_ray;
 

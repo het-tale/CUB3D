@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 01:23:52 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:29:52 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	get_ray_direction(t_ray *ray)
 {
-	if (ray->is_ray_facing_down && !ray->was_hit_vertical)
+	if (ray->is_down && !ray->hit_v_h)
 		ray->ray_dir = 'S';
-	else if (!ray->was_hit_vertical)
+	else if (!ray->hit_v_h)
 		ray->ray_dir = 'N';
-	else if (ray->is_ray_facing_right)
+	else if (ray->is_right)
 		ray->ray_dir = 'E';
 	else
 		ray->ray_dir = 'W';

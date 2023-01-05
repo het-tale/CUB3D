@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 01:15:22 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 01:32:33 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ t_ray	init_ray(double ray_angle)
 	t_ray	ray;
 
 	ray.ray_angle = normalize_angle(ray_angle);
-	ray.wall_hit_x = 0;
-	ray.wall_hit_y = 0;
+	ray.wall_x = 0;
+	ray.wall_y = 0;
 	ray.distance = 0;
 	if (ray.ray_angle > 0 && ray.ray_angle < M_PI)
-		ray.is_ray_facing_down = 1;
+		ray.is_down = 1;
 	else
-		ray.is_ray_facing_down = 0;
-	ray.is_ray_facing_up = !ray.is_ray_facing_down;
+		ray.is_down = 0;
+	ray.is_up = !ray.is_down;
 	if (ray.ray_angle < 0.5 * M_PI || ray.ray_angle > 1.5 * M_PI)
-		ray.is_ray_facing_right = 1;
+		ray.is_right = 1;
 	else
-		ray.is_ray_facing_right = 0;
-	ray.is_ray_facing_left = !ray.is_ray_facing_right;
+		ray.is_right = 0;
+	ray.is_left = !ray.is_right;
 	return (ray);
 }
 
