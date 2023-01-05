@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:57:09 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 02:28:11 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 05:06:58 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,6 @@ int	key_press(int key, t_mlx *mlx)
 		rotate_right(mlx);
 	else if (key == LEFT_KEY)
 		rotate_left(mlx);
-	update(mlx);
-	return (0);
-}
-
-int	key_released(int key, t_mlx *mlx)
-{
-	if (key == ESC)
-		ft_exit(mlx, ESC);
-	else if (key == W)
-		mlx->player.walk_ud_dir = 0;
-	else if (key == S)
-		mlx->player.walk_ud_dir = 0;
-	else if (key == A)
-		mlx->player.walk_rl_dir = 0;
-	else if (key == D)
-		mlx->player.walk_rl_dir = 0;
-	else if (key == RIGHT_KEY)
-		mlx->player.turn_direction = 0;
-	else if (key == LEFT_KEY)
-		mlx->player.turn_direction = 0;
 	update(mlx);
 	return (0);
 }

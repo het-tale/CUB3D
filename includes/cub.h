@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 03:13:35 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 05:21:54 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ void		move_left(t_mlx *mlx);
 void		move_right(t_mlx *mlx);
 void		rotate_right(t_mlx *mlx);
 void		rotate_left(t_mlx *mlx);
-int			key_released(int key, t_mlx *mlx);
 int			ft_exit(t_mlx *mlx, int is_esc);
 void		update(t_mlx *mlx);
 

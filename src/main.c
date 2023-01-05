@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 09:39:41 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 03:10:18 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 05:18:16 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char *argv[])
 	}
 	mlx = init_mlx(argv);
 	mlx_hook(mlx->mlx_win, 2, 1L << 0, key_press, mlx);
-	mlx_hook(mlx->mlx_win, 3, 1L << 1, key_released, mlx);
 	mlx_hook(mlx->mlx_win, 17, 0, ft_exit, mlx);
 	mlx_loop(mlx->mlx);
 	free_leaks(&mlx->leak);

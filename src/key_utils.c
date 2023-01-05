@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:04:58 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 02:32:32 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/05 05:51:44 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	move_forward(t_mlx *mlx)
 
 	new_x = mlx->player.x;
 	new_y = mlx->player.y;
-	mlx->player.walk_ud_dir = -1;
+	mlx->player.walk_ud_dir = 1;
 	step = mlx->player.move_speed * mlx->player.walk_ud_dir;
-	new_x -= step * cos(mlx->player.rot_angle);
-	new_y -= step * sin(mlx->player.rot_angle);
+	new_x += step * cos(mlx->player.rot_angle);
+	new_y += step * sin(mlx->player.rot_angle);
 	if (!is_wall(new_x, new_y, mlx))
 	{
 		mlx->player.x = new_x;
@@ -39,10 +39,10 @@ void	move_backward(t_mlx *mlx)
 
 	new_x = mlx->player.x;
 	new_y = mlx->player.y;
-	mlx->player.walk_ud_dir = 1;
+	mlx->player.walk_ud_dir = -1;
 	step = mlx->player.move_speed * mlx->player.walk_ud_dir;
-	new_x -= step * cos(mlx->player.rot_angle);
-	new_y -= step * sin(mlx->player.rot_angle);
+	new_x += step * cos(mlx->player.rot_angle);
+	new_y += step * sin(mlx->player.rot_angle);
 	if (!is_wall(new_x, new_y, mlx))
 	{
 		mlx->player.x = new_x;
@@ -58,10 +58,10 @@ void	move_left(t_mlx *mlx)
 
 	new_x = mlx->player.x;
 	new_y = mlx->player.y;
-	mlx->player.walk_rl_dir = 1;
+	mlx->player.walk_rl_dir = -1;
 	step = mlx->player.move_speed * mlx->player.walk_rl_dir;
-	new_x += step * cos(normalize_angle(mlx->player.rot_angle - M_PI_2));
-	new_y += step * sin(normalize_angle(mlx->player.rot_angle - M_PI_2));
+	new_x -= step * cos(normalize_angle(mlx->player.rot_angle - M_PI_2));
+	new_y -= step * sin(normalize_angle(mlx->player.rot_angle - M_PI_2));
 	if (!is_wall(new_x, new_y, mlx))
 	{
 		mlx->player.x = new_x;
