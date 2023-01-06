@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 02:22:49 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:01:20 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void		update(t_mlx *mlx);
 
 /*				not specified yet		*/
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int			get_pixel_color(t_img *img, int x, int y);
 
 /*			Draw minimap			*/
 void		draw_map(t_mlx *mlx);
