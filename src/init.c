@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 11:50:02 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 02:12:46 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,28 @@ t_ray	init_ray(double ray_angle)
 	return (ray);
 }
 
-// plyr.x = 4 * TILE_SIZE + TILE_SIZE / 2;
-// plyr.y = 3 * TILE_SIZE + TILE_SIZE / 2; 
-t_player	init_player(void)
+double	get_player_angle(char c)
+{
+	double	angle;
+
+	if (c == 'N')
+		angle = 1.5 * M_PI;
+	else if (c == 'S')
+		angle = M_PI_2;
+	else if (c == 'W')
+		angle = M_PI;
+	else
+		angle = 0;
+	return (angle);
+}
+
+t_player	init_player(t_mlx *mlx)
 {
 	t_player	plyr;
 
-	plyr.x = 6 * TILE_SIZE + TILE_SIZE / 2;
-	plyr.y = 7 * TILE_SIZE + TILE_SIZE / 2;
-	plyr.rot_angle = 1.5 * M_PI;
+	plyr.x = mlx->player.pos[0] * TILE_SIZE + TILE_SIZE / 2;
+	plyr.y = mlx->player.pos[1] * TILE_SIZE + TILE_SIZE / 2;
+	plyr.rot_angle = get_player_angle(mlx->player.direction);
 	plyr.rot_speed = 3 * (M_PI / 180);
 	plyr.move_speed = 10;
 	plyr.turn_direction = 0;
@@ -64,7 +77,8 @@ t_mlx	*init_mlx(char *argv[])
 	mlx->win_w = mlx->map_w * TILE_SIZE;
 	mlx->win_h = mlx->map_h * TILE_SIZE;
 	mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_w, mlx->win_h, "CUB");
-	mlx->player = init_player();
+	get_player_coordinates(mlx);
+	mlx->player = init_player(mlx);
 	mlx->fov = 60 * (M_PI / 180);
 	mlx->scale = 0.1;
 	mlx->map_color = 0xFFFFFF;

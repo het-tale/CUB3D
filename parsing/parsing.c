@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 09:43:34 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 03:06:27 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 02:22:33 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,35 @@ void	count_length(t_mlx *mlx)
 		if (mlx->map_w < count)
 			mlx->map_w = count;
 	}
+}
+
+void	get_player_coordinates(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mlx->map[i])
+	{
+		j = 0;
+		while (mlx->map[i][j])
+		{
+			if (mlx->map[i][j] == 'N' || mlx->map[i][j] == 'S' || mlx->map[i][j] == 'E' || mlx->map[i][j] == 'W')
+			{
+				mlx->player.pos[0] = j;
+				mlx->player.pos[1] = i;
+				mlx->player.direction = mlx->map[i][j];
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	rgb2int(int r, int g, int b)
+{
+    return (r << 16) | (g << 8) | b;
 }
 
 //1 * 180 = pi

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 10:58:08 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 02:22:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ typedef struct s_player
 {
 	double			x;
 	double			y;
-	double			dir_x;
-	double			dir_y;
-	double			plane_x;
-	double			plane_y;
+	char			direction;
+	int				pos[2];
 	double			rot_speed;
 	double			move_speed;
 	double			rot_angle;
@@ -154,10 +152,12 @@ int			count_lines(char *argv[], t_mlx *mlx);
 char		**ft_parse(char *argv[], t_mlx *mlx);
 void		count_length(t_mlx *mlx);
 void		draw_map(t_mlx *mlx);
+void		get_player_coordinates(t_mlx *mlx);
+int			rgb2int(int r, int g, int b);
 
 /*			init		*/
 t_ray		init_ray(double ray_angle);
-t_player	init_player(void);
+t_player	init_player(t_mlx *mlx);
 t_mlx		*init_mlx(char *argv[]);
 
 /*				Math		*/
