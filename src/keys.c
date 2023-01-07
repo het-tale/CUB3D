@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:57:09 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 21:24:43 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/07 10:32:26 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ void	rotate_left(t_mlx *mlx)
 {
 	mlx->player.turn_direction = -1;
 	mlx->player.rot_angle += mlx->player.turn_direction * mlx->player.rot_speed;
+	mlx->player.rot_angle = normalize_angle(mlx->player.rot_angle);
 }
 
 void	rotate_right(t_mlx *mlx)
 {
 	mlx->player.turn_direction = 1;
 	mlx->player.rot_angle += mlx->player.turn_direction * mlx->player.rot_speed;
+	mlx->player.rot_angle = normalize_angle(mlx->player.rot_angle);
 }
 
 int	key_press(int key, t_mlx *mlx)
