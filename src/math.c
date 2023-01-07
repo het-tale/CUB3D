@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:48:55 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 13:39:16 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 21:23:55 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ double	distance_between_points(double x1, double y1, double x2, double y2)
 
 double	normalize_angle(double angle)
 {
-	angle = remainder(angle, 2 * M_PI);
 	if (angle < 0)
-		angle = (2 * M_PI) + angle;
+		angle += (2 * M_PI);
+	else if (angle > 2 * M_PI)
+		angle -= 2 * M_PI;
 	return (angle);
 }

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:57:09 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 05:06:58 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/06 21:24:43 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	key_press(int key, t_mlx *mlx)
 {
 	if (key == ESC)
 		ft_exit(mlx, ESC);
-	else if (key == W)
+	else if (key == W || key == UP_KEY)
 		move_forward(mlx);
-	else if (key == S)
+	else if (key == S || key == DOWN_KEY)
 		move_backward(mlx);
 	else if (key == A)
 		move_left(mlx);
