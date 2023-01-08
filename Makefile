@@ -6,7 +6,7 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/05 03:11:39 by het-tale         ###   ########.fr        #
+#    Updated: 2023/01/08 15:13:12 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ SRCS    =    src/main.c parsing/parsing.c parsing/libft/*.c parsing/get_next_lin
 
 #SRCS	= test.c
 #linux
-# OBJ    =    ${SRCS:.c=.o}
+OBJ    =    ${SRCS:.c=.o}
 
 # FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 #mac
-OBJ    =    ${SRCS:.c=.o}
+# OBJ    =    ${SRCS:.c=.o}
 
-FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+# FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 RM        =    rm -f
 
@@ -33,15 +33,15 @@ CC        =    gcc
 all : $(NAME)
 
 #mac
-$(NAME) : $(SRCS)
-	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+# $(NAME) : $(SRCS)
+# 	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 #linux
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-# $(NAME): $(OBJ)
-# 	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 
 clean :

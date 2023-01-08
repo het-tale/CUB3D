@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 09:39:41 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 14:01:40 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:13:50 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		write(2, "Usage : ./cub3d <filename>\n", 28);
+		int t = write(2, "Usage : ./cub3d <filename>\n", 28);
+		(void)t;
 		exit(EXIT_FAILURE);
 	}
 	mlx = init_mlx(argv);

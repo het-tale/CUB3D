@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:48:55 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 21:23:55 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:35:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,19 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	get_pixel_color(t_img *img, int x, int y)
-{
-	char	*dst;
+// int	get_pixel_color(t_texture *img, int x, int y)
+// {
+// 	char	*dst;
 
-	dst = img->addr + (y * img->ll + x * (img->bpp / 8));
+// 	dst = img->addr + (y * img->ll + x * (img->bpp / 8));
+// 	return (*(unsigned int *)dst);
+// }
+
+unsigned int	get_pixel_color(t_texture *data, int x, int y)
+{
+	char			*dst;
+
+	dst = data->t_addr + (y * data->ll + x * (data->bpp / 8));
 	return (*(unsigned int *)dst);
 }
 

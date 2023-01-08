@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 10:57:30 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:05:05 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void	ceil_floor(t_mlx *mlx, t_wall *wall)
 void	draw_wall(t_mlx *mlx)
 {
 	t_wall	wall;
+	int	offset_x;
+	int	offset_y;
+	unsigned int texel_color;
 
 	wall.i = 0;
 	wall.ray_angle = mlx->player.rot_angle - (mlx->fov / 2);
@@ -82,11 +85,65 @@ void	draw_wall(t_mlx *mlx)
 	{
 		init_tools(mlx, &wall);
 		ceil_floor(mlx, &wall);
-		wall.j = wall.start;
-		while (wall.j < wall.end)
+		if (mlx->ray.ray_dir == 'N')
 		{
-			my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, 0x808080);
-			wall.j++;
+			if (mlx->ray.is_hit_v)
+				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
+			else
+				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
+			wall.j = wall.start;
+			while (wall.j < wall.end)
+			{
+				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[0].t_height / wall.wall_h);
+				texel_color = get_pixel_color(&mlx->txt[0], offset_x, offset_y);
+				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
+				wall.j++;
+			}
+		}
+		else if (mlx->ray.ray_dir == 'S')
+		{
+			if (mlx->ray.is_hit_v)
+				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
+			else
+				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
+			wall.j = wall.start;
+			while (wall.j < wall.end)
+			{
+				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[1].t_height / wall.wall_h);
+				texel_color = get_pixel_color(&mlx->txt[1], offset_x, offset_y);
+				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
+				wall.j++;
+			}
+		}
+		else if (mlx->ray.ray_dir == 'E')
+		{
+			if (mlx->ray.is_hit_v)
+				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
+			else
+				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
+			wall.j = wall.start;
+			while (wall.j < wall.end)
+			{
+				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[2].t_height / wall.wall_h);
+				texel_color = get_pixel_color(&mlx->txt[2], offset_x, offset_y);
+				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
+				wall.j++;
+			}
+		}
+		else if (mlx->ray.ray_dir == 'W')
+		{
+			if (mlx->ray.is_hit_v)
+				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
+			else
+				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
+			wall.j = wall.start;
+			while (wall.j < wall.end)
+			{
+				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[3].t_height / wall.wall_h);
+				texel_color = get_pixel_color(&mlx->txt[2], offset_x, offset_y);
+				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
+				wall.j++;
+			}
 		}
 		wall.ray_angle += mlx->fov / mlx->num_rays;
 		wall.i++;

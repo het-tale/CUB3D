@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/06 02:12:46 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:29:40 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,31 @@ t_mlx	*init_mlx(char *argv[])
 	mlx->scale = 0.1;
 	mlx->map_color = 0xFFFFFF;
 	mlx->num_rays = mlx->win_w;
+	mlx->txt[0].t_file = "./textures/n.xpm";
+	mlx->txt[1].t_file = "./textures/s.xpm";
+	mlx->txt[2].t_file = "./textures/e.xpm";
+	mlx->txt[3].t_file = "./textures/w.xpm";
+	int i = 0;
+	while (i < 4)
+	{
+		mlx->txt[i].t_image = mlx_xpm_file_to_image(mlx->mlx, mlx->txt[i].t_file, &mlx->txt[i].t_width, &mlx->txt[i].t_height);
+		if (!mlx->txt[i].t_image
+		|| mlx->txt[i].t_width != TILE_SIZE
+		|| mlx->txt[i].t_height != TILE_SIZE)
+		{
+			int t = write(2, "invalid texture\n", 17);
+			(void)t;
+			i--;
+			while (i > -1)
+			{
+				mlx_destroy_image(mlx->mlx, mlx->txt[i].t_image);
+				i--;
+			}
+			ft_exit(mlx, 0);
+		}
+		mlx->txt[i].t_addr = mlx_get_data_addr(mlx->txt[i].t_image, &mlx->txt[i].bpp, &mlx->txt[i].ll, &mlx->txt[i].end);
+		i++;
+	}
 	start_walls(mlx);
 	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->mlx_img.img, 0, 0);
