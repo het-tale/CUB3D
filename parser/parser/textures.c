@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:18:18 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 13:39:47 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:30:17 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	get_line_info(char *str, char *s2, int size, char **tex)
 		else
 		{
 			*tex = ft_strdup(ft_substr(str, size, ft_strlen(str) - size - 1));
-			// printf("tex---> %s\n", *tex);
 			return (1);
 		}
 	}

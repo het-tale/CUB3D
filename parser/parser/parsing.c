@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:07:12 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 11:50:31 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:40:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	init(t_mlx *param)
 	param->txt[2].name = NULL;
 	param->txt[3].name = NULL;
 	param->colors = malloc (sizeof(t_colors));
+	leaks_removal(&param->leak, param->colors);
 	param->map = malloc (sizeof(t_map));
+	leaks_removal(&param->leak, param->map);
 	param->colors->c = NULL;
 	param->colors->f = NULL;
 	param->map->map = NULL;

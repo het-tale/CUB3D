@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 23:52:28 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 17:32:13 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:35:24 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,6 @@ typedef struct s_mlx
 	t_texture		txt[4];
 	t_colors		*colors;
 }	t_mlx;
-
-
-// typedef struct s_param
-// {
-// 	t_map		*map;
-// 	t_plyr		player;
-// 	t_textures	textures;
-// 	t_colors	*colors;
-// }		t_mlx;
 
 /*
 ============================== Libft ====================================

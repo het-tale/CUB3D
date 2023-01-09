@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:26:03 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 13:41:21 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:32:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ int	check_extension_tex(char *argv, char *exten, int size)
 	return (0);
 }
 
-// char	*remove_newline(char *line)
-// {
-// 	char	*res;
-// 	int		len;
-
-// 	len = ft_strlen(line);
-// 	res = ft_substr(line, 0,len - 1);
-// 	return (res);
-// }
-
 int	check_files_tex(char *tex)
 {
 	int		len;
@@ -69,5 +59,33 @@ int	check_files_tex(char *tex)
 	}
 	else
 		return (0);
+	return (1);
+}
+
+int	check_errors(char *str, t_mlx *param)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (i > param->map->width)
+		param->map->width = i;
+	line = skip_spaces(str);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+			break ;
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
+			param->map->c_plyr++;
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' '
+			&& line[i] != '\t')
+			return (0);
+		i++;
+	}
 	return (1);
 }

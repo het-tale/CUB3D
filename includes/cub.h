@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 17:55:56 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:24:12 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,4 +224,5 @@ void			west_texture(t_mlx *mlx, t_wall *wall);
 /*				free memory     */
 void			leaks_removal(t_leaks **leaks, void *ptr);
 void			free_leaks(t_leaks **garbage);
+void			ft_free_mlx(t_mlx *mlx);
 #endif

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:57:08 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 11:15:05 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:44:08 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	count_lines(int fd, char *av)
 	while (str != NULL)
 	{
 		str = get_next_line(fd);
+		free(str);
 		len++;
 	}
 	close(fd);
@@ -49,6 +50,7 @@ char	**check_map(int fd, char *av)
 	{
 		map[i] = ft_strdup(line);
 		line = get_next_line(fd);
+		free(line);
 		i++;
 	}
 	map[i] = NULL;
