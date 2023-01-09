@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 21:16:01 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/07 23:59:49 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/09 11:15:05 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
+#include "../../includes/cub.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:10:45 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/05 07:02:14 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:49:30 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	draw_map(t_mlx *mlx)
 	int	j;
 
 	i = 0;
-	while (i < mlx->map_h)
+	while (i < mlx->map->height)
 	{
 		j = 0;
-		while (j < mlx->map_w)
+		while (j < mlx->map->width)
 		{
-			if (mlx->map[i][j] == '1')
+			if (mlx->map->map[i][j] == '1')
 				draw_square(mlx, (j * TILE_SIZE), (i * TILE_SIZE), 0);
 			j++;
 		}
@@ -77,7 +77,7 @@ int	is_wall(double x, double y, t_mlx *mlx)
 	j = floor(y / TILE_SIZE);
 	if (x < 0 || x >= mlx->win_w || y < 0 || y >= mlx->win_h)
 		return (1);
-	if (mlx->map[j][i] == '1')
+	if (mlx->map->map[j][i] == '1')
 		return (1);
 	return (0);
 }

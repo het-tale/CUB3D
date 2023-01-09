@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:24:32 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 10:34:45 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/09 14:43:37 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
+#include "../../includes/cub.h"
 
-int	check_errors(char *str, t_param *param)
+int	check_errors(char *str, t_mlx *param)
 {
 	int		i;
 	char	*line;
@@ -40,7 +40,7 @@ int	check_errors(char *str, t_param *param)
 	return (1);
 }
 
-void	get_map(t_param *param, int fd, char *av)
+void	get_map(t_mlx *param, int fd, char *av)
 {
 	int		len;
 	int		i;
@@ -68,7 +68,7 @@ void	get_map(t_param *param, int fd, char *av)
 		ft_error("Error : one plyr plllls \n");
 }
 
-int	check_wall(t_param *param)
+int	check_wall(t_mlx *param)
 {
 	int		i;
 	int		j;
@@ -81,15 +81,36 @@ int	check_wall(t_param *param)
 		str = skip_spaces(param->map->map[i]);
 		if (*str == '\n')
 			return (0);
-		while (str[j] && str[j] != '\n')
+		// printf("line -->%s\n", str);
+		while (str[j])//&& str[j] != '\n')// && str[j] != '\n')
 		{
-			if (i == 0 && str[j] != '1' && str[j] != ' ' && str[j] != '\t')
+			if (i == 0 && str[j] != '1' && str[j] != ' ' && str[j] != '\t' && str[j] != '\n')
+			{
+				printf("j--->%d,str[j]-->%c\n", j, str[j]);
 				return (0);
-			else if ((*str != '1') || (param->map->map[i + 1] == NULL
-					&& str[j] != '1' && str[j] != ' ' && str[j] != '\t'))
+			}
+				//return (0);
+			else if (*str != '1') //|| (param->map->map[i + 1] == NULL && str[j] != '1' && str[j] != ' ' && str[j] != '\t'))
+			{
+				printf("j--->%d,str[j]-->%c\n", j, str[j]);
+				printf("2\n");
 				return (0);
-			else if (str[j + 2] == '\0' && str[j] != '1')
+			}
+				//return (0);
+			else if (param->map->map[i + 1] == NULL && str[j] != '1'&& str[j] != ' '&& str[j] != '\t')
+			{
+				printf("j--->%d,str[j]-->%c\n", j, str[j]);
+				printf("3\n");
 				return (0);
+			}
+				//return (0);
+			else if (str[j + 2] == '\0' && str[j] != '1' && str[j] != ' ' && str[j] != '\t' && str[j] != '\n')
+			{
+				printf("j--->%d,str[j]-->%c\n", j, str[j]);
+				printf("4\n");
+				return (0);
+			}
+				//return (0);
 			j++;
 		}
 		i++;
@@ -97,14 +118,53 @@ int	check_wall(t_param *param)
 	return (1);
 }
 
-int	check_elements_map(t_param *param)
+// int	check_elements_map(t_mlx *param)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	p;
+
+// 	i = 0;
+// 	p = param->player.direction;
+// 	if (!check_wall(param))
+// 		ft_error("Error : in wall map !");
+// 	while (param->map->map[i])
+// 	{
+// 		j = 0;
+// 		while (param->map->map[i][j] && param->map->map[i][j] != '\n')
+// 		{
+// 			if (param->map->map[i][j] == '0' && param->map->map[i][j] == p)
+// 			{
+// 				if (param->map->map[i + 1][j] != '1' && param->map->map[i + 1][j] != '0' && param->map->map[i + 1][j] != p)
+// 				{
+// 					printf("j--> %d, i --> %d, char --> %c\n", j , i,param->map->map[i - 1][j]);
+// 					return (ft_error("Erroooor 1!!!!\n"));
+// 				}
+// 				else if (param->map->map[i - 1][j] != '1' && param->map->map[i - 1][j] != '0' && param->map->map[i - 1][j] != p)
+// 				{
+// 					printf("j--> %d, i --> %d, char --> %c\n", j , i,param->map->map[i - 1][j]);
+// 					return (ft_error("Erroooor 2!!!!\n"));
+// 				}
+// 				else if (param->map->map[i][j-1] != '1' && param->map->map[i][j-1] != '0' && param->map->map[i][j-1] != p)
+// 					return (ft_error("Erroooor 3!!!!\n"));
+// 				else if (param->map->map[i][j+1] != '1' && param->map->map[i][j+1] != '0' && param->map->map[i][j+1] != p)
+// 					return (ft_error("Erroooor 4!!!!\n"));
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
+int	check_elements_map(t_mlx *param)
 {
 	int		i;
 	int		j;
 	char	p;
 
 	i = 0;
-	p = param->player.dir;
+	p = param->player.direction;
 	if (!check_wall(param))
 		ft_error("Error : in wall map !");
 	while (param->map->map[i])

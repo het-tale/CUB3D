@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 09:39:41 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 04:49:18 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:36:27 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 
+	(void)mlx;
+	(void)argv;
 	if (argc != 2)
 	{
 		write(2, "Usage : ./cub3d <filename>\n", 28);

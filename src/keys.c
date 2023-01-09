@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:57:09 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/07 10:32:26 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:56:09 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,9 @@ int	key_press(int key, t_mlx *mlx)
 		rotate_left(mlx);
 	update(mlx);
 	return (0);
+}
+
+int	rgb2int(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
 }

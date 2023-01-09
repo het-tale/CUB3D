@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 05:05:51 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:36:16 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	ceil_floor(t_mlx *mlx, t_wall *wall)
 	y = 0;
 	while (y < wall->start)
 	{
-		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, 0x87ceeb);
+		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, mlx->ceil_color);
 		y++;
 	}
 	y = wall->end;
 	while (y < mlx->win_h)
 	{
-		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, 0x654321);
+		my_mlx_pixel_put(&mlx->mlx_img, wall->i, y, mlx->floor_color);
 		y++;
 	}
 }

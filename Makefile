@@ -6,14 +6,21 @@
 #    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/09 04:52:47 by het-tale         ###   ########.fr        #
+#    Updated: 2023/01/09 11:18:37 by het-tale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    =    cub3d
 
-SRCS    =    src/main.c parsing/parsing.c parsing/libft/*.c parsing/get_next_line/get_next_line.c parsing/get_next_line/get_next_line_utils.c \
-			 src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c src/textures.c
+SRCS    =   src/main.c \
+			src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c src/textures.c \
+			parser/libft/ft_isalpha.c parser/libft/ft_memchr.c parser/libft/ft_putchar_fd.c parser/libft/ft_strchr.c parser/libft/ft_strlcpy.c parser/libft/ft_strrchr.c \
+			parser/libft/ft_atoi.c parser/libft/ft_isascii.c parser/libft/ft_memcmp.c parser/libft/ft_putendl_fd.c parser/libft/ft_strdup.c parser/libft/ft_strlen.c parser/libft/ft_strtrim.c \
+			parser/libft/ft_bzero.c parser/libft/ft_isdigit.c parser/libft/ft_memcpy.c parser/libft/ft_putnbr_fd.c parser/libft/ft_striteri.c parser/libft/ft_strmapi.c parser/libft/ft_substr.c \
+			parser/libft/ft_calloc.c parser/libft/ft_isprint.c parser/libft/ft_memmove.c parser/libft/ft_putstr_fd.c parser/libft/ft_strjoin.c parser/libft/ft_strncmp.c parser/libft/ft_tolower.c \
+			parser/libft/ft_isalnum.c parser/libft/ft_itoa.c parser/libft/ft_memset.c parser/libft/ft_split.c parser/libft/ft_strlcat.c parser/libft/ft_strnstr.c parser/libft/ft_toupper.c \
+			parser/get_next_line/get_next_line.c parser/get_next_line/get_next_line_utils.c parser/parser/parsing.c parser/parser/check_file.c parser/parser/get_map.c parser/parser/get_path.c\
+			parser/parser/parsing_utils.c parser/parser/textures.c parser/parser/colors.c
 
 #SRCS	= test.c
 #linux

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:33:58 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 10:27:53 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:39:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
+#include "../../includes/cub.h"
 
 int	check_errors_rgb(const char *str)
 {
@@ -45,6 +45,8 @@ int	get_rgb(char *str, int *rgb)
 	char	**split;
 
 	i = 0;
+	if (!str)
+		return (0);
 	split = ft_split(str, ',');
 	while (split[i])
 		i++;

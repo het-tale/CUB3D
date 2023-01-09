@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 23:52:28 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 10:25:18 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/09 17:32:13 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,61 @@
 # include <stdio.h>
 # define BUFFER_SIZE 1
 
-typedef struct s_textures
+typedef struct s_mlx_img
 {
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
-}				t_textures;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		endian;
+	int		ll;
+}	t_img;
 
-typedef struct s_colors
+typedef struct s_leaks
 {
-	int		ceiling[3];
-	int		floor[3];
-	char	*c;
-	char	*f;
-}				t_colors;
+	void			*leak;
+	struct s_leaks	*next;
+}	t_leaks;
+
+typedef struct s_texture
+{
+	char	*name;
+	int		width;
+	int		height;
+	void	*t_image;
+	char	*t_addr;
+	int		bpp;
+	int		ll;
+	int		end;
+}	t_texture;
+
+typedef struct s_player
+{
+	double			x;
+	double			y;
+	char			direction;
+	int				pos[2];
+	double			rot_speed;
+	double			move_speed;
+	double			rot_angle;
+	double			turn_direction;
+	double			walk_ud_dir;
+	double			walk_rl_dir;
+	unsigned int	plyr_color;
+}	t_player;
+
+typedef struct s_ray
+{
+	double	ray_angle;
+	double	wall_x;
+	double	wall_y;
+	double	distance;
+	int		is_hit_v;
+	int		is_down;
+	int		is_up;
+	int		is_right;
+	int		is_left;
+	char	ray_dir;
+}	t_ray;
 
 typedef struct s_map
 {
@@ -44,20 +84,43 @@ typedef struct s_map
 	int		size;
 }			t_map;
 
-typedef struct s_plyr
+typedef struct s_colors
 {
-	int		xpos;
-	int		ypos;
-	char	dir;
-}				t_plyr;
+	int		ceiling[3];
+	int		floor[3];
+	char	*c;
+	char	*f;
+}	t_colors;
 
-typedef struct s_param
+typedef struct s_mlx
 {
-	t_map		*map;
-	t_plyr		player;
-	t_textures	textures;
-	t_colors	*colors;
-}		t_param;
+	void			*mlx;
+	void			*mlx_win;
+	t_img			mlx_img;
+	t_map			*map;
+	int				win_w;
+	int				win_h;
+	t_player		player;
+	t_ray			ray;
+	double			fov;
+	double			scale;
+	double			num_rays;
+	unsigned int	map_color;
+	unsigned int	ceil_color;
+	unsigned int	floor_color;
+	t_leaks			*leak;
+	t_texture		txt[4];
+	t_colors		*colors;
+}	t_mlx;
+
+
+// typedef struct s_param
+// {
+// 	t_map		*map;
+// 	t_plyr		player;
+// 	t_textures	textures;
+// 	t_colors	*colors;
+// }		t_mlx;
 
 /*
 ============================== Libft ====================================
@@ -120,12 +183,15 @@ int		check_extension_tex(char *argv, char *exten, int size);
 int		check_files_tex(char *tex);
 int		count_lines(int fd, char *av);
 char	**check_map(int fd, char *av);
-int		check_errors(char *str, t_param *param);
-void	get_map(t_param *param, int fd, char *av);
-int		check_wall(t_param *param);
-int		check_elements_map(t_param *param);
-void	check_info(t_param *param, int fd, char *av);
+int		check_errors(char *str, t_mlx *param);
+void	get_map(t_mlx *param, int fd, char *av);
+int		check_wall(t_mlx *param);
+int		check_elements_map(t_mlx *param);
+void	check_info(t_mlx *param, int fd, char *av);
 int		get_rgb(char *str, int *rgb);
 int		check_errors_rgb(const char *str);
+
+void	init(t_mlx *param);
+void	pos_plyr(t_mlx *param);
 
 #endif

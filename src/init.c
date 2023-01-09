@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 05:07:11 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:54:57 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,12 @@ t_ray	init_ray(double ray_angle)
 	return (ray);
 }
 
-void	init_textures(t_mlx *mlx)
-{
-	mlx->txt[0].name = "./textures/n.xpm";
-	mlx->txt[1].name = "./textures/s.xpm";
-	mlx->txt[2].name = "./textures/e.xpm";
-	mlx->txt[3].name = "./textures/w.xpm";
-	get_textures(mlx);
-}
-
 t_player	init_player(t_mlx *mlx)
 {
 	t_player	plyr;
 
-	plyr.x = mlx->player.pos[0] * TILE_SIZE + TILE_SIZE / 2;
-	plyr.y = mlx->player.pos[1] * TILE_SIZE + TILE_SIZE / 2;
+	plyr.x = mlx->player.x * TILE_SIZE + TILE_SIZE / 2;
+	plyr.y = mlx->player.y * TILE_SIZE + TILE_SIZE / 2;
 	plyr.rot_angle = get_player_angle(mlx->player.direction);
 	plyr.rot_speed = 3 * (M_PI / 180);
 	plyr.move_speed = 10;
@@ -58,26 +49,39 @@ t_player	init_player(t_mlx *mlx)
 	return (plyr);
 }
 
+void	init_parsing(char *argv[], t_mlx *param)
+{
+	int	fd;
+
+	init(param);
+	fd = open(argv[1], O_RDWR);
+	get_map(param, fd, argv[1]);
+	pos_plyr(param);
+	if (!check_elements_map(param))
+		ft_error("Map Not valid");
+}
+
 t_mlx	*init_mlx(char *argv[])
 {
 	t_mlx	*mlx;
 
 	mlx = malloc(sizeof(t_mlx));
 	leaks_removal(&mlx->leak, mlx);
-	mlx->map = ft_parse(argv, mlx);
-	count_length(mlx);
-	mlx->map_h = count_lines(argv, mlx);
+	init_parsing(argv, mlx);
 	mlx->mlx = mlx_init();
-	mlx->win_w = mlx->map_w * TILE_SIZE;
-	mlx->win_h = mlx->map_h * TILE_SIZE;
+	mlx->win_w = mlx->map->width * TILE_SIZE;
+	mlx->win_h = mlx->map->height * TILE_SIZE;
+	mlx->ceil_color = rgb2int(mlx->colors->ceiling[0],
+			mlx->colors->ceiling[1], mlx->colors->ceiling[2]);
+	mlx->floor_color = rgb2int(mlx->colors->floor[0],
+			mlx->colors->floor[1], mlx->colors->floor[2]);
 	mlx->mlx_win = mlx_new_window(mlx->mlx, mlx->win_w, mlx->win_h, "CUB");
-	get_player_coordinates(mlx);
 	mlx->player = init_player(mlx);
 	mlx->fov = 60 * (M_PI / 180);
 	mlx->scale = 0.1;
 	mlx->map_color = 0xFFFFFF;
 	mlx->num_rays = mlx->win_w;
-	init_textures(mlx);
+	get_textures(mlx);
 	start_walls(mlx);
 	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->mlx_img.img, 0, 0);
