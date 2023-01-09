@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 11:23:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/08 16:05:05 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 05:05:51 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	cast_ray(t_mlx *mlx, t_ray *ray)
 	cast_horz_ray(mlx, ray, rcst);
 	cast_vert_ray(mlx, ray, rcst);
 	if (rcst->found_h_wall)
-		rcst->h_dist = distance_between_points(mlx->player.x, mlx->player.y,
+		rcst->h_dist = dist_points(mlx->player.x, mlx->player.y,
 				rcst->h_hit_x, rcst->h_hit_y);
 	else
 		rcst->h_dist = INT_MAX;
 	if (rcst->found_v_wall)
-		rcst->v_dist = distance_between_points(mlx->player.x, mlx->player.y,
+		rcst->v_dist = dist_points(mlx->player.x, mlx->player.y,
 				rcst->v_hit_x, rcst->v_hit_y);
 	else
 		rcst->v_dist = INT_MAX;
@@ -52,6 +52,10 @@ void	init_tools(t_mlx *mlx, t_wall *wall)
 		wall->start = 0;
 		wall->end = mlx->win_h;
 	}
+	if (mlx->ray.is_hit_v)
+		wall->offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
+	else
+		wall->offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
 }
 
 void	ceil_floor(t_mlx *mlx, t_wall *wall)
@@ -74,10 +78,7 @@ void	ceil_floor(t_mlx *mlx, t_wall *wall)
 
 void	draw_wall(t_mlx *mlx)
 {
-	t_wall	wall;
-	int	offset_x;
-	int	offset_y;
-	unsigned int texel_color;
+	t_wall			wall;
 
 	wall.i = 0;
 	wall.ray_angle = mlx->player.rot_angle - (mlx->fov / 2);
@@ -85,66 +86,10 @@ void	draw_wall(t_mlx *mlx)
 	{
 		init_tools(mlx, &wall);
 		ceil_floor(mlx, &wall);
-		if (mlx->ray.ray_dir == 'N')
-		{
-			if (mlx->ray.is_hit_v)
-				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
-			else
-				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
-			wall.j = wall.start;
-			while (wall.j < wall.end)
-			{
-				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[0].t_height / wall.wall_h);
-				texel_color = get_pixel_color(&mlx->txt[0], offset_x, offset_y);
-				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
-				wall.j++;
-			}
-		}
-		else if (mlx->ray.ray_dir == 'S')
-		{
-			if (mlx->ray.is_hit_v)
-				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
-			else
-				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
-			wall.j = wall.start;
-			while (wall.j < wall.end)
-			{
-				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[1].t_height / wall.wall_h);
-				texel_color = get_pixel_color(&mlx->txt[1], offset_x, offset_y);
-				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
-				wall.j++;
-			}
-		}
-		else if (mlx->ray.ray_dir == 'E')
-		{
-			if (mlx->ray.is_hit_v)
-				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
-			else
-				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
-			wall.j = wall.start;
-			while (wall.j < wall.end)
-			{
-				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[2].t_height / wall.wall_h);
-				texel_color = get_pixel_color(&mlx->txt[2], offset_x, offset_y);
-				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
-				wall.j++;
-			}
-		}
-		else if (mlx->ray.ray_dir == 'W')
-		{
-			if (mlx->ray.is_hit_v)
-				offset_x = (int)mlx->ray.wall_y % TILE_SIZE;
-			else
-				offset_x = (int)mlx->ray.wall_x % TILE_SIZE;
-			wall.j = wall.start;
-			while (wall.j < wall.end)
-			{
-				offset_y = (wall.j + (wall.wall_h / 2) - mlx->win_h / 2) * ((float)mlx->txt[3].t_height / wall.wall_h);
-				texel_color = get_pixel_color(&mlx->txt[2], offset_x, offset_y);
-				my_mlx_pixel_put(&mlx->mlx_img, wall.i, wall.j, texel_color);
-				wall.j++;
-			}
-		}
+		north_texture(mlx, &wall);
+		south_texture(mlx, &wall);
+		east_texture(mlx, &wall);
+		west_texture(mlx, &wall);
 		wall.ray_angle += mlx->fov / mlx->num_rays;
 		wall.i++;
 	}
