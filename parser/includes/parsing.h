@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 23:52:28 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 18:35:24 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/10 05:02:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_player
 	double			x;
 	double			y;
 	char			direction;
-	int				pos[2];
 	double			rot_speed;
 	double			move_speed;
 	double			rot_angle;
@@ -82,7 +81,7 @@ typedef struct s_map
 	int		start;
 	int		c_plyr;
 	int		size;
-}			t_map;
+}	t_map;
 
 typedef struct s_colors
 {
@@ -125,7 +124,7 @@ int		ft_isprint(int c);
 void	*ft_memset(void *b, int c, size_t len);
 int		ft_tolower(int c);
 void	ft_bzero(void *s, size_t n);
-void	*ft_memcpy( void *dst, const void *src, size_t n);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -145,7 +144,7 @@ void	ft_putendl_fd(char *s, int fd);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strdup(const char *s1);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	**ft_split(char const *s, char c);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
