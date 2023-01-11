@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:18:18 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 19:30:17 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:34:53 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 int	get_line_info(char *str, char *s2, int size, char **tex)
 {
+	char	*res;
+
 	if (ft_strncmp(str, s2, size) == 0)
 	{
 		if (*tex)
+		{
+			free(*tex);
 			return (ft_error("Error : Duplicate \n"));
+		}
 		else
 		{
-			*tex = ft_strdup(ft_substr(str, size, ft_strlen(str) - size - 1));
+			res = ft_substr(str, size, ft_strlen(str) - size - 1);
+			*tex = ft_strdup(res);
+			free(res);
 			return (1);
 		}
 	}
@@ -33,6 +40,7 @@ int	treat_textures(char **map, t_mlx *param, int i)
 
 	while (map[i])
 	{
+		free(str);
 		str = skip_spaces(map[i]);
 		if (get_line_info(str, "NO ", 3, &param->txt[0].name) == 1)
 		{
@@ -75,6 +83,7 @@ int	treat_textures(char **map, t_mlx *param, int i)
 			return (1);
 		}
 	}
+	free(str);
 	return (0);
 }
 
@@ -84,7 +93,7 @@ void	check_info(t_mlx *param, int fd, char *av)
 	int		i;
 
 	i = 0;
-	map = check_map(fd, av);
+	map = check_map(fd, av, param);
 	if (treat_textures(map, param, i) == 0)
 		ft_error("Error : Duplicate\n");
 	if (param->map->start == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:33:58 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 12:39:15 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:25:16 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	get_rgb(char *str, int *rgb)
 		if (check_errors_rgb(split[i]) == 0)
 			return (0);
 		rgb[i] = ft_atoi(split[i]);
+		free (split[i]);
 		i++;
 	}
+	free(split[i]);
 	return (1);
 }

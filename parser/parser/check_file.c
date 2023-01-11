@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:26:03 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 18:32:08 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:28:44 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,31 @@
 
 int	check_extension(char *argv, char *exten)
 {
-	int	len;
+	char	*res;
+	int		len;
 
 	if (argv && argv[0] == '.')
 		return (0);
 	len = ft_strlen(argv);
-	if (len > 4 && ft_strncmp(ft_substr(argv, len - 4, len), exten, 4) == 0)
+	res = ft_substr(argv, len - 4, len);
+	if (len > 4 && ft_strncmp(res, exten, 4) == 0)
+	{
+		free(res);
 		return (1);
+	}
 	return (0);
 }
 
 int	check_extension_tex(char *argv, char *exten, int size)
 {
-	char	*str;
+	char	*res;
 
-	str = skip_spaces(argv);
-	if (ft_strncmp(ft_substr(argv, size - 4, size), exten, 4) == 0 && size > 4)
+	res = ft_substr(argv, size - 4, size);
+	if (ft_strncmp(res, exten, 4) == 0 && size > 4)
+	{
+		free(res);
 		return (1);
+	}
 	return (0);
 }
 

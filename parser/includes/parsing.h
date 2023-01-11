@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 23:52:28 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/10 05:02:15 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:49:45 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int		check_extension(char *argv, char *exten);
 int		check_extension_tex(char *argv, char *exten, int size);
 int		check_files_tex(char *tex);
 int		count_lines(int fd, char *av);
-char	**check_map(int fd, char *av);
+char	**check_map(int fd, char *av, t_mlx *param);
 int		check_errors(char *str, t_mlx *param);
 void	get_map(t_mlx *param, int fd, char *av);
 int		check_wall(t_mlx *param);
@@ -180,7 +180,6 @@ int		check_elements_map(t_mlx *param);
 void	check_info(t_mlx *param, int fd, char *av);
 int		get_rgb(char *str, int *rgb);
 int		check_errors_rgb(const char *str);
-
 void	init(t_mlx *param);
 void	pos_plyr(t_mlx *param);
 

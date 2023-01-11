@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:24:32 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/09 19:02:57 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:42:04 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_map(t_mlx *param, int fd, char *av)
 	i = 0;
 	check_info(param, fd, av);
 	param->map->width = 0;
-	map = check_map(fd, av);
+	map = check_map(fd, av, param);
 	len = count_lines(fd, av) - param->map->start;
 	param->map->map = (char **)malloc(sizeof(char *) * (len + 1));
 	leaks_removal(&param->leak, param->map->map);
