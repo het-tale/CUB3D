@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:24:32 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/11 20:42:04 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/12 02:45:23 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,29 @@ int	check_wall(t_mlx *param)
 	return (1);
 }
 
+int	check_elements_map_subloop(t_mlx *param, int *i, int *j, char p)
+{
+	if (param->map->map[*i][*j] == '0' || param->map->map[*i][*j] == p)
+	{
+		if (param->map->map[*i + 1][*j] == '\0'
+			|| param->map->map[*i + 1][*j] == ' '
+			|| param->map->map[*i + 1][*j] == '\t'
+			|| param->map->map[*i + 1][*j] == '\n')
+			return (0);
+		else if (param->map->map[*i - 1][*j] == ' '
+		|| param->map->map[*i - 1][*j] == '\t'
+		|| param->map->map[*i - 1][*j] == '\n')
+			return (0);
+		else if (param->map->map[*i][*j + 1] == ' '
+		|| param->map->map[*i][*j + 1] == '\t')
+			return (0);
+		else if (param->map->map[*i][*j - 1] == ' '
+		|| param->map->map[*i][*j - 1] == '\t')
+			return (0);
+	}
+	return (1);
+}
+
 int	check_elements_map_loop(t_mlx *param, int i, int j, char p)
 {
 	while (param->map->map[i])
@@ -88,38 +111,11 @@ int	check_elements_map_loop(t_mlx *param, int i, int j, char p)
 		j = 0;
 		while (param->map->map[i][j] && param->map->map[i][j] != '\n')
 		{
-			if (param->map->map[i][j] == '0' || param->map->map[i][j] == p)
-			{
-				if ((param->map->map[i + 1][j] == ' '
-					|| param->map->map[i + 1][j] == '\t'))
-					return (ft_error("Erroooor !!!!\n"));
-				else if (param->map->map[i - 1][j] == ' '
-					|| param->map->map[i - 1][j] == '\t')
-					return (ft_error("Erroooor !!!!\n"));
-				else if (param->map->map[i][j + 1] == ' '
-					|| param->map->map[i][j + 1] == '\t')
-					return (ft_error("Erroooor !!!!\n"));
-				else if (param->map->map[i][j - 1] == ' '
-					|| param->map->map[i][j - 1] == '\t')
-					return (ft_error("Erroooor !!!!\n"));
-			}
+			if (check_elements_map_subloop(param, &i, &j, p) == 0)
+				return (ft_error("Erroooor !!!!\n"));
 			j++;
 		}
 		i++;
 	}
 	return (1);
-}
-
-int	check_elements_map(t_mlx *param)
-{
-	int		i;
-	int		j;
-	char	p;
-
-	i = 0;
-	j = 0;
-	p = param->player.direction;
-	if (!check_wall(param))
-		ft_error("Error : in wall map !");
-	return (check_elements_map_loop(param, i, j, p));
 }

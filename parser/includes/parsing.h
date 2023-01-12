@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 23:52:28 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/11 20:49:45 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/12 02:47:44 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,6 @@ int		get_rgb(char *str, int *rgb);
 int		check_errors_rgb(const char *str);
 void	init(t_mlx *param);
 void	pos_plyr(t_mlx *param);
+int		check_elements_map_loop(t_mlx *param, int i, int j, char p);
 
 #endif
