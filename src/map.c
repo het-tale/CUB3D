@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 10:10:45 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 11:49:30 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:04:23 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,12 @@ int	is_wall(double x, double y, t_mlx *mlx)
 	if (mlx->map->map[j][i] == '1')
 		return (1);
 	return (0);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->ll + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
