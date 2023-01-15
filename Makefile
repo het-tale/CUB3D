@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+         #
+#    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/09 11:18:37 by het-tale         ###   ########.fr        #
+#    Updated: 2023/01/12 03:35:09 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME    =    cub3d
+NAME    =    cub3D
 
 SRCS    =   src/main.c \
 			src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c src/textures.c \
@@ -22,13 +22,6 @@ SRCS    =   src/main.c \
 			parser/get_next_line/get_next_line.c parser/get_next_line/get_next_line_utils.c parser/parser/parsing.c parser/parser/check_file.c parser/parser/get_map.c parser/parser/get_path.c\
 			parser/parser/parsing_utils.c parser/parser/textures.c parser/parser/colors.c
 
-#SRCS	= test.c
-#linux
-# OBJ    =    ${SRCS:.c=.o}
-
-# FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
-
-#mac
 OBJ    =    ${SRCS:.c=.o}
 
 FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
@@ -39,17 +32,8 @@ CC        =    gcc
 
 all : $(NAME)
 
-#mac
 $(NAME) : $(SRCS)
 	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
-
-#linux
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
-# $(NAME): $(OBJ)
-# 	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
 
 clean :
 	${RM} ${OBJ}

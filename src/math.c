@@ -6,11 +6,19 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:48:55 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/14 16:05:09 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/09 05:06:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->ll + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
 
 unsigned int	get_pixel_color(t_texture *data, int x, int y)
 {
@@ -47,9 +55,4 @@ double	get_player_angle(char c)
 	else
 		angle = 0;
 	return (angle);
-}
-
-int	rgb2int(int r, int g, int b)
-{
-	return ((r << 16) | (g << 8) | b);
 }

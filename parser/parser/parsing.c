@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:07:12 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/12 02:43:18 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/12 03:21:39 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_elements_map(t_mlx *param)
 	j = 0;
 	p = param->player.direction;
 	if (!check_wall(param))
-		ft_error("Error : in wall map !");
+		ft_error("Error \n > in wall map !");
 	return (check_elements_map_loop(param, i, j, p));
 }
 

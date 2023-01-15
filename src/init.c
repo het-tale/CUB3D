@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 09:29:06 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/10 05:42:54 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/12 03:22:51 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_parsing(char *argv[], t_mlx *param)
 	get_map(param, fd, argv[1]);
 	pos_plyr(param);
 	if (!check_elements_map(param))
-		ft_error("Map Not valid");
+		ft_error("Error \n > Map Not valid");
 }
 
 t_mlx	*init_mlx(char *argv[])

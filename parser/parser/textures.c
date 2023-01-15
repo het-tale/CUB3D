@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:18:18 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/12 02:43:08 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/12 06:20:34 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	get_line_info(char *str, char *s2, int size, char **tex)
 		if (*tex)
 		{
 			free(*tex);
-			return (ft_error("Error : Duplicate \n"));
+			return (ft_error("Error\n > Duplicate in map \n"));
 		}
 		else
 		{
 			res = ft_substr(str, size, ft_strlen(str) - size - 1);
 			*tex = ft_strdup(res);
-			free(res);
+			//free(res);
 			return (1);
 		}
 	}
@@ -64,7 +64,6 @@ int	treat_textures(char **map, t_mlx *param, int i)
 
 	while (map[i])
 	{
-		free(str);
 		str = skip_spaces(map[i]);
 		if (check_for_textures(str, param) || check_for_colors(str, param))
 		{
@@ -89,23 +88,23 @@ void	check_info(t_mlx *param, int fd, char *av)
 	i = 0;
 	map = check_map(fd, av, param);
 	if (treat_textures(map, param, i) == 0)
-		ft_error("Error : Duplicate\n");
+		ft_error("Error \n > In map\n");
 	if (param->map->start == -1)
-		ft_error("Error : Empty map !!");
+		ft_error("Error\n > Empty map !!");
 	if (!param->colors->c || !param->colors->f || !param->txt[2].name
 		|| !param->txt[0].name || !param->txt[1].name || !param->txt[3].name)
-		ft_error("Error : Pooooor map !!");
+		ft_error("Error \n >  Pooooor map !!");
 	if (get_rgb(param->colors->f, param->colors->floor) == 0
 		|| get_rgb(param->colors->c, param->colors->ceiling) == 0)
-		ft_error("Error : Error in colors !!");
+		ft_error("Error\n > Error in colors !!");
 	if (check_files_tex(param->txt[2].name) == 2
 		|| check_files_tex(param->txt[0].name) == 2
 		|| check_files_tex(param->txt[3].name) == 2
 		|| check_files_tex(param->txt[1].name) == 2)
-		ft_error("Error : file not exist or Permission denied");
+		ft_error("Error \n > file not exist or Permission denied");
 	if (check_files_tex(param->txt[0].name) == 0
 		|| check_files_tex(param->txt[2].name) == 0
 		|| check_files_tex(param->txt[3].name) == 0
 		|| check_files_tex(param->txt[1].name) == 0)
-		ft_error("Error : Exetension textures ");
+		ft_error("Error \n >  Exetension textures ");
 }
