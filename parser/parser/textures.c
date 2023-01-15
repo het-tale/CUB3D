@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:18:18 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/12 06:20:34 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/15 18:37:54 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 int	get_line_info(char *str, char *s2, int size, char **tex)
 {
-	char	*res;
+	char	*line;
 
 	if (ft_strncmp(str, s2, size) == 0)
 	{
 		if (*tex)
-		{
-			free(*tex);
-			return (ft_error("Error\n > Duplicate in map \n"));
-		}
+			return (ft_error("Error\n>> Element duplicate in map \n"));
 		else
 		{
-			res = ft_substr(str, size, ft_strlen(str) - size - 1);
-			*tex = ft_strdup(res);
-			//free(res);
+			line = ft_substr(str, size, ft_strlen(str) - size - 1);
+			*tex = ft_strdup(skip_spaces(line));
+			free(line);
 			return (1);
 		}
 	}
@@ -40,9 +37,9 @@ int	check_for_textures(char *str, t_mlx *param)
 		return (1);
 	else if (get_line_info(str, "SO ", 3, &param->txt[1].name) == 1)
 		return (1);
-	else if (get_line_info(str, "WE ", 3, &param->txt[3].name) == 1)
-		return (1);
 	else if (get_line_info(str, "EA ", 3, &param->txt[2].name) == 1)
+		return (1);
+	else if (get_line_info(str, "WE ", 3, &param->txt[3].name) == 1)
 		return (1);
 	return (0);
 }
@@ -65,6 +62,7 @@ int	treat_textures(char **map, t_mlx *param, int i)
 	while (map[i])
 	{
 		str = skip_spaces(map[i]);
+		free(map[i]);
 		if (check_for_textures(str, param) || check_for_colors(str, param))
 		{
 			i++;
@@ -76,7 +74,6 @@ int	treat_textures(char **map, t_mlx *param, int i)
 			return (1);
 		}
 	}
-	free(str);
 	return (0);
 }
 

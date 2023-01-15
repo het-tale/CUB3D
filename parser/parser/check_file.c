@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:26:03 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/12 00:45:05 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/15 16:43:37 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_extension(char *argv, char *exten)
 	return (0);
 }
 
-int	check_extension_tex(char *argv, char *exten, int size)
+int	check_extension_tex(char *argv, char *exten, int size)//
 {
 	char	*res;
 
@@ -46,21 +46,17 @@ int	check_files_tex(char *tex)
 {
 	int		len;
 	int		i;
-	int		tmp;
 
-	len = 0;
+	len = ft_strlen(tex);
 	i = 0;
-	while (tex[len])
-		len++;
-	tmp = len;
 	while (i < len)
 	{
-		if (tex[len - 2] != '\t' && tex[len - 2] != ' ')
+		if (tex[len - 1] != '\t' && tex[len - 1] != ' ')
 			break ;
 		i++;
 		len--;
 	}
-	if (check_extension_tex(tex, ".xpm", tmp - i))
+	if (check_extension_tex(tex, ".xpm", len))
 	{
 		if (open(tex, O_RDONLY) < 0)
 			return (2);

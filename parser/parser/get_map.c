@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:24:32 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/12 03:21:16 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:45:16 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_map(t_mlx *param, int fd, char *av)
 		if (map[param->map->start] == NULL)
 			break ;
 		if (check_errors(map[param->map->start], param) == 0)
-			ft_error ("Error \n > in map \n");
+			ft_error ("Error :\n>> in map -_- \n");
 		param->map->map[i] = map[param->map->start];
 		i++;
 		param->map->start++;
@@ -38,7 +38,7 @@ void	get_map(t_mlx *param, int fd, char *av)
 	param->map->height = i;
 	param->map->map[i] = NULL;
 	if (param->map->c_plyr != 1)
-		ft_error("Error \n > one plyr plllls \n");
+		ft_error("Error :\n>>one player please ^_* \n");
 }
 
 int	check_wall_loop(t_mlx *param, int j, char *str, int i)
@@ -73,7 +73,7 @@ int	check_wall(t_mlx *param)
 		j = 0;
 		str = skip_spaces(param->map->map[i]);
 		if (*str == '\n')
-			return (0);
+			ft_error("Error :\n>>Empty line in map\n");
 		if (!check_wall_loop(param, j, str, i))
 			return (0);
 		i++;
@@ -112,7 +112,7 @@ int	check_elements_map_loop(t_mlx *param, int i, int j, char p)
 		while (param->map->map[i][j] && param->map->map[i][j] != '\n')
 		{
 			if (check_elements_map_subloop(param, &i, &j, p) == 0)
-				return (ft_error("Error \n > in map !!!!\n"));
+				return (ft_error("Error:\n>> in map !!!!\n"));
 			j++;
 		}
 		i++;
