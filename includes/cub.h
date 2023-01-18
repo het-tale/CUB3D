@@ -6,7 +6,7 @@
 /*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/09 19:24:12 by het-tale         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:31:49 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,80 +50,6 @@
 # define NUM_RAYS 1000
 # define INT_MAX 2147483647
 
-// typedef struct s_mlx_img
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bpp;
-// 	int		endian;
-// 	int		ll;
-// }	t_img;
-
-// typedef struct s_leaks
-// {
-// 	void			*leak;
-// 	struct s_leaks	*next;
-// }	t_leaks;
-
-// typedef struct s_texture
-// {
-// 	char	*name;
-// 	int		width;
-// 	int		height;
-// 	void	*t_image;
-// 	char	*t_addr;
-// 	int		bpp;
-// 	int		ll;
-// 	int		end;
-// }	t_texture;
-
-// typedef struct s_player
-// {
-// 	double			x;
-// 	double			y;
-// 	char			direction;
-// 	int				pos[2];
-// 	double			rot_speed;
-// 	double			move_speed;
-// 	double			rot_angle;
-// 	double			turn_direction;
-// 	double			walk_ud_dir;
-// 	double			walk_rl_dir;
-// 	unsigned int	plyr_color;
-// }	t_player;
-
-// typedef struct s_ray
-// {
-// 	double	ray_angle;
-// 	double	wall_x;
-// 	double	wall_y;
-// 	double	distance;
-// 	int		is_hit_v;
-// 	int		is_down;
-// 	int		is_up;
-// 	int		is_right;
-// 	int		is_left;
-// 	char	ray_dir;
-// }	t_ray;
-
-// typedef struct s_mlx
-// {
-// 	void			*mlx;
-// 	void			*mlx_win;
-// 	t_img			mlx_img;
-// 	t_map			map;
-// 	int				win_w;
-// 	int				win_h;
-// 	t_player		player;
-// 	t_ray			ray;
-// 	double			fov;
-// 	double			scale;
-// 	double			num_rays;
-// 	unsigned int	map_color;
-// 	t_leaks			*leak;
-// 	t_texture		txt[4];
-// }	t_mlx;
-
 typedef struct s_raycast
 {
 	double	x_inter;
@@ -159,15 +85,6 @@ typedef struct s_wall
 	unsigned int	texel_color;
 }	t_wall;
 
-/* parsing*/
-
-// int				count_lines(char *argv[], t_mlx *mlx);
-// char			**ft_parse(char *argv[], t_mlx *mlx);
-// void			count_length(t_mlx *mlx);
-// void			draw_map(t_mlx *mlx);
-// void			get_player_coordinates(t_mlx *mlx);
-// int				rgb2int(int r, int g, int b);
-
 /*			init		*/
 t_ray			init_ray(double ray_angle);
 t_player		init_player(t_mlx *mlx);
@@ -179,6 +96,7 @@ double			normalize_angle(double angle);
 double			get_player_angle(char c);
 /*				keys			*/
 int				key_press(int key, t_mlx *mlx);
+int				mouse_movement(int key, int x, int y, t_mlx *mlx);
 void			move_forward(t_mlx *mlx);
 void			move_backward(t_mlx *mlx);
 void			move_left(t_mlx *mlx);
@@ -199,8 +117,6 @@ void			draw_square(t_mlx *mlx, int x, int y, int is_p);
 int				is_wall(double x, double y, t_mlx *mlx);
 
 /*				raycasting				*/
-void			init_casting(t_mlx *mlx);
-void			draw_rays(t_mlx *mlx);
 void			cast_ray(t_mlx *mlx, t_ray *ray);
 void			cast_vert_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 void			cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
@@ -224,5 +140,4 @@ void			west_texture(t_mlx *mlx, t_wall *wall);
 /*				free memory     */
 void			leaks_removal(t_leaks **leaks, void *ptr);
 void			free_leaks(t_leaks **garbage);
-void			ft_free_mlx(t_mlx *mlx);
 #endif
