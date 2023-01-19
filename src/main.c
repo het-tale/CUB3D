@@ -23,6 +23,7 @@ int	main(int argc, char *argv[])
 	}
 	mlx = init_mlx(argv);
 	mlx_hook(mlx->mlx_win, 2, 1L << 0, key_press, mlx);
+	mlx_mouse_hook(mlx->mlx_win, mouse_movement, mlx);
 	mlx_hook(mlx->mlx_win, 17, 0, ft_exit, mlx);
 	mlx_loop(mlx->mlx);
 	free_leaks(&mlx->leak);

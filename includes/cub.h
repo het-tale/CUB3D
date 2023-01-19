@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:31:15 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/17 17:30:43 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/19 01:28:02 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ typedef struct s_wall
 	unsigned int	texel_color;
 }	t_wall;
 
-/*
-========================= init =========================
-*/
+/*			init		*/
 t_ray			init_ray(double ray_angle);
 t_player		init_player(t_mlx *mlx);
 t_mlx			*init_mlx(char *argv[]);
@@ -88,6 +86,7 @@ double			normalize_angle(double angle);
 double			get_player_angle(char c);
 /*				keys			*/
 int				key_press(int key, t_mlx *mlx);
+int				mouse_movement(int key, int x, int y, t_mlx *mlx);
 void			move_forward(t_mlx *mlx);
 void			move_backward(t_mlx *mlx);
 void			move_left(t_mlx *mlx);
@@ -111,11 +110,7 @@ void			draw_map(t_mlx *mlx);
 void			draw_square(t_mlx *mlx, int x, int y, int is_p);
 int				is_wall(double x, double y, t_mlx *mlx);
 
-/*
-========================= raycasting =========================
-*/
-void			init_casting(t_mlx *mlx);
-void			draw_rays(t_mlx *mlx);
+/*				raycasting				*/
 void			cast_ray(t_mlx *mlx, t_ray *ray);
 void			cast_vert_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
 void			cast_horz_ray(t_mlx *mlx, t_ray *ray, t_raycast *rcst);
@@ -147,6 +142,4 @@ void			west_texture(t_mlx *mlx, t_wall *wall);
 
 void			leaks_removal(t_leaks **leaks, void *ptr);
 void			free_leaks(t_leaks **garbage);
-void			ft_free_mlx(t_mlx *mlx);
-
 #endif

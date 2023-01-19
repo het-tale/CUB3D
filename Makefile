@@ -6,14 +6,14 @@
 #    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/19 00:45:16 by aheddak          ###   ########.fr        #
+#    Updated: 2023/01/19 01:26:59 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    =    cub3D
 
 SRCS    =   src/main.c \
-			src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c src/textures.c \
+			src/init.c src/math.c src/keys.c src/key_utils.c src/map.c src/walls.c src/raycasting.c src/ft_free.c src/textures.c src/mouse_key.c \
 			parser/libft/ft_isalpha.c parser/libft/ft_memchr.c parser/libft/ft_putchar_fd.c parser/libft/ft_strchr.c parser/libft/ft_strlcpy.c parser/libft/ft_strrchr.c \
 			parser/libft/ft_atoi.c parser/libft/ft_isascii.c parser/libft/ft_memcmp.c parser/libft/ft_putendl_fd.c parser/libft/ft_strdup.c parser/libft/ft_strlen.c parser/libft/ft_strtrim.c \
 			parser/libft/ft_bzero.c parser/libft/ft_isdigit.c parser/libft/ft_memcpy.c parser/libft/ft_putnbr_fd.c parser/libft/ft_striteri.c parser/libft/ft_strmapi.c parser/libft/ft_substr.c \
@@ -24,7 +24,7 @@ SRCS    =   src/main.c \
 
 OBJ    =    ${SRCS:.c=.o}
 
-FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -O3 -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 RM        =    rm -f
 

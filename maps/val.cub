@@ -1,5 +1,4 @@
-C 0,0,0
-NO ./textures/n.xpm
+NO        ./textures/n.xpm
 SO ./textures/s.xpm
 EA ./textures/e.xpm
 WE ./textures/w.xpm
