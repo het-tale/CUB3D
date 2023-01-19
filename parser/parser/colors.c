@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: het-tale <het-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:33:58 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/19 01:23:29 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/19 02:27:15 by het-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub.h"
+
+int	check_condition(const char *str, int c)
+{
+	while (str[c])
+	{
+		if (str[c] == ' ' || str[c] == '\t' || str[c] == '\n')
+			c++;
+		else
+			break ;
+	}
+	if (str[c])
+		return (0);
+	return (1);
+}
 
 int	check_errors_rgb(const char *str)
 {
@@ -33,11 +47,7 @@ int	check_errors_rgb(const char *str)
 		c++;
 	}
 	if (str[c])
-	{
-		if (str[c] == '\n')
-			return (1);
-		return (0);
-	}
+		check_condition(str, c);
 	return (1);
 }
 
