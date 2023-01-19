@@ -6,7 +6,7 @@
 #    By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 22:29:31 by het-tale          #+#    #+#              #
-#    Updated: 2023/01/12 03:35:09 by aheddak          ###   ########.fr        #
+#    Updated: 2023/01/19 00:45:16 by aheddak          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS    =   src/main.c \
 
 OBJ    =    ${SRCS:.c=.o}
 
-FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+FLAGS    =    -Wall -Wextra -Werror -I /usr/local/include -O3 -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 RM        =    rm -f
 

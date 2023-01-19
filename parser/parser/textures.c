@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:18:18 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/15 18:37:54 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:25:46 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_line_info(char *str, char *s2, int size, char **tex)
 	if (ft_strncmp(str, s2, size) == 0)
 	{
 		if (*tex)
-			return (ft_error("Error\n>> Element duplicate in map \n"));
+			return (ft_error("Error\n>>Element duplicate in map \n"));
 		else
 		{
 			line = ft_substr(str, size, ft_strlen(str) - size - 1);

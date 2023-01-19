@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 04:34:38 by het-tale          #+#    #+#             */
-/*   Updated: 2023/01/12 01:23:55 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/18 23:38:48 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	north_texture(t_mlx *mlx, t_wall *wall)
 		wall->j = wall->start;
 		while (wall->j < wall->end)
 		{
-			wall->offset_y = (wall->j + (wall->wall_h / 2) - mlx->win_h / 2)
+			wall->offset_y = (wall->j+ (wall->wall_h / 2) - mlx->win_h / 2)
 				* ((float)mlx->txt[0].height / wall->wall_h);
 			wall->texel_color = get_pixel_color(&mlx->txt[0],
 					wall->offset_x, wall->offset_y);
@@ -127,31 +127,3 @@ void	west_texture(t_mlx *mlx, t_wall *wall)
 		}
 	}
 }
-
-// int check_row(char *row, int j, char p)
-// {
-//     if (row[j] == '0' || row[j] == p)
-//     {
-//         if (row[j + 1] == ' ' || row[j + 1] == '\t')
-//             return (ft_error("Erroooor !!!!\n"));
-//         else if (row[j - 1] == ' ' || row[j - 1] == '\t')
-//             return (ft_error("Erroooor !!!!\n"));
-//     }
-//     return (1);
-// }
-
-// int check_elements_map_loop(t_mlx *param, int i, int j, char p)
-// {
-//     while (param->map->map[i])
-//     {
-//         j = 0;
-//         while (param->map->map[i][j] && param->map->map[i][j] != '\n')
-//         {
-//             if (check_row(param->map->map[i], j, p) == 0)
-//                 return (0);
-//             j++;
-//         }
-//         i++;
-//     }
-//     return (1);
-// }

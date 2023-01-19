@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:26:03 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/15 16:43:37 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/19 00:31:04 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	check_extension(char *argv, char *exten)
 	char	*res;
 	int		len;
 
-	if (argv && argv[0] == '.')
-		return (0);
 	len = ft_strlen(argv);
 	res = ft_substr(argv, len - 4, len);
 	if (len > 4 && ft_strncmp(res, exten, 4) == 0)
@@ -29,7 +27,7 @@ int	check_extension(char *argv, char *exten)
 	return (0);
 }
 
-int	check_extension_tex(char *argv, char *exten, int size)//
+int	check_extension_tex(char *argv, char *exten, int size)
 {
 	char	*res;
 

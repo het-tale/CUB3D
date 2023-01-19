@@ -6,7 +6,7 @@
 /*   By: aheddak <aheddak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 00:24:32 by aheddak           #+#    #+#             */
-/*   Updated: 2023/01/15 15:45:16 by aheddak          ###   ########.fr       */
+/*   Updated: 2023/01/19 00:30:56 by aheddak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,14 @@ int	check_wall(t_mlx *param)
 	while (param->map->map[i])
 	{
 		j = 0;
+		if (param->map->map[i][j] == '\n')
+			ft_error("Error :\n>>Empty line in map\n");
 		str = skip_spaces(param->map->map[i]);
 		if (*str == '\n')
-			ft_error("Error :\n>>Empty line in map\n");
+		{
+			i++;
+			continue ;
+		}
 		if (!check_wall_loop(param, j, str, i))
 			return (0);
 		i++;
